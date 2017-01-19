@@ -1,9 +1,10 @@
 Annie Shen
 ashen7@ucsc.edu
-CMPS 101
+CMPS101
 
-Table of Context:
--
--
--
--
+Table of Content:
+-List.java
+-ListClient.java
+-Lex.java
+-Makefile
+-README
