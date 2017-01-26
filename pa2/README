@@ -1,0 +1,25 @@
+Annie Shen
+ashen7
+1562848
+CMPS 101 pa2
+
+Table of Content:
+-README
+-Lex.c
+-List.c
+-List.h
+-ListClient.c
+-Makefile
+
+Descriptions:
+README: Includes Table of Content and descriptions and purposes of files.
+
+Lex.c:
+
+List.c:
+
+List.h:
+
+ListClient.c: A given C file for testing purposes.
+
+Makefile: 
