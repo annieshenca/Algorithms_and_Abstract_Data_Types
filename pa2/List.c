@@ -72,9 +72,10 @@ void freeList(List* pL){
 		while( length(*pL) != 0 ){
 			deleteBack(*pL);
 		}
-		printf("@freeList(): after deleteBack(*pL)\n");
+		//printf("@freeList(): after deleteBack(*pL)\n");
 		free(*pL);
 		*pL=NULL;
+		//printf("end of freeList(List *pL)");
 	}
 }
 
@@ -181,17 +182,17 @@ void clear(List L){
 		printf("clear() Error: calling on an empty list.\n");
 		exit(EXIT_FAILURE);
 	}
-//	while(length(L) != 0){
-//		deleteBack(L);
-//	}
-	printf("@clear(), before freeList(&L)\n");
-	freeList(&L);
-	printf("@clear(), before freeList(&L)\n");
+	//printf("@clear(), before freeList(&L)\n");
+	freeList(L);
 	L->head = NULL;
 	L->tail = NULL;
 	L->cursor = NULL;
 	L->cIndex = -1;
 	L->numItems = 0;
+//	while(length(L) != 0){
+//		deleteBack(L);
+//	}
+	//printf("end of clear\n");
 }
 
 //moveFront()
