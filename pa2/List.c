@@ -361,7 +361,7 @@ void printList(FILE* out, List L){
 	}
 	Node N = L->head;
 	for(; N != NULL; N = N->next){
-		fprintf(out, "%d", N->item);
+		fprintf(out, "%d ", N->item);
 	}
 }
 
