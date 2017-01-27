@@ -1,4 +1,4 @@
-/* da fuk
+/*
  * Annie Shen
  * ashen7 #1562848
  * CMPS 101 pa2
@@ -412,18 +412,7 @@ void deleteBack(List L){
 	}
 	freeNode(&temp);
 	L->numItems--;
-<<<<<<< HEAD
-//	if(length(L) == 1){ //If the list has only one element
-//		L->head = L->tail = L->cursor = NULL; //Reset
-//		L->cIndex = -1;
-//	} else{ //The list has more than 1 element
-//		L->tail = L->tail->prev;
-//		L->tail->next = NULL;
-//		L->numItems--;
-	}
-=======
 }
->>>>>>> 5d18a24a30178409003d5cf541c59876a9735b65
 
 //delete()
 //Deletes cursor element, making cursor undefined.
