@@ -414,7 +414,6 @@ void deleteBack(List L){
 //		L->tail->next = NULL;
 //		L->numItems--;
 	}
-}
 
 //delete()
 //Deletes cursor element, making cursor undefined.
