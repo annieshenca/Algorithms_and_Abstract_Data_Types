@@ -327,7 +327,6 @@ void deleteBack(List L){
 		L->tail->next = NULL;
 		L->numItems--;
 	}
-	freeNode();
 }
 
 //delete()
@@ -362,7 +361,7 @@ void printList(FILE* out, List L){
 	}
 	Node N = L->head;
 	for(; N != NULL; N = N->next){
-		printf(out, "%d", N->item);
+		fprintf(out, "%d", N->item);
 	}
 }
 
