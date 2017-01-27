@@ -379,14 +379,16 @@ void deleteFront(List L){
 	if(length(L) <= 0){
 		printf("deleteFront() Error: List is empty");
 	}
+	Node temp = L->head;
 	if(length(L) == 1){ //If the list has only one element
 		L->head = L->tail = L->cursor = NULL; //Reset
 		L->cIndex = -1;
 	} else{ //The list has more than 1 element
 		L->head = L->head->next;
 		L->head->prev = NULL;
-		L->numItems--;
 	}
+	freeNode(&temp);
+	L->numItems--;
 }
 
 //deleteBack()
@@ -399,21 +401,17 @@ void deleteBack(List L){
 	if(length(L) <= 0){
 		printf("deleteBack() Error: List is empty");
 	}
-	Node delete = L->tail;
-	if(L->tail->prev != NULL){
+
+	Node temp = L->tail;
+	if(length(L) == 1){ //If the list has only one element
+		L->head = L->tail = L->cursor = NULL; //Reset
+		L->cIndex = -1;
+	} else{ //The list has more than 1 element
 		L->tail = L->tail->prev;
+		L->tail->next = NULL;
 	}
-	L->tail->next = NULL;
-	freeNode(&delete);
+	freeNode(&temp);
 	L->numItems--;
-//	if(length(L) == 1){ //If the list has only one element
-//		L->head = L->tail = L->cursor = NULL; //Reset
-//		L->cIndex = -1;
-//	} else{ //The list has more than 1 element
-//		L->tail = L->tail->prev;
-//		L->tail->next = NULL;
-//		L->numItems--;
-	}
 }
 
 //delete()
@@ -430,6 +428,7 @@ void delete(List L){
 	if(index(L) < 0){
 		printf("delete() error: invalid index");
 	}
+	Node temp = L->cursor;
 	if(L->cIndex == 0){ //If cursor is at head
 		deleteFront(L); //Call deleteFront() to do the same job
 	} else if(L->cIndex == length(L) -1){ //If the cursor is at tail
@@ -439,6 +438,7 @@ void delete(List L){
 		Node after = L->cursor->next;
 		before->next = after;
 		after->prev = before;
+		freeNode(&temp);
 		L->cursor = NULL;
 		L->cIndex = -1;
 		L->numItems--;
