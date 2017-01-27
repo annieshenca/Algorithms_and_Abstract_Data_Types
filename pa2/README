@@ -4,12 +4,13 @@ ashen7
 CMPS 101 pa2
 
 Table of Content:
--README
 -Lex.c
 -List.c
 -List.h
 -ListClient.c
 -Makefile
+-README
+(Total files: 6 files)
 
 Descriptions:
 README: Includes Table of Content and descriptions and purposes of files.
