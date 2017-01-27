@@ -49,8 +49,10 @@ int main(int argc, char* argv[]){
    printList(stdout,A);
    printf("\n");
    printf("%d\n", length(A));
+   printf("@ListClient: before clear\n");
    clear(A);
    printf("%d\n", length(A));
+   printf("after clear\n");
 
    freeList(&A);
    freeList(&B);
