@@ -169,7 +169,7 @@ void moveFront(List L){
 void moveBack(List L){
 	if(length(L) > 0){
 		L->cursor = L->tail;
-		L->cIndex = length(L) -1;
+		L->cIndex = L->numItems -1;
 	}
 }
 
@@ -327,6 +327,7 @@ void deleteBack(List L){
 		L->tail->next = NULL;
 		L->numItems--;
 	}
+	freeNode();
 }
 
 //delete()
@@ -354,7 +355,16 @@ void delete(List L){
 	}
 }
 
-//void printList(FILE* out, List L);
+void printList(FILE* out, List L){
+	if(length(L) == 0){
+		printf("printList() Error: calling empty list.");
+		exit(EXIT_FAILURE);
+	}
+	Node N = L->head;
+	for(; N != NULL; N = N->next){
+		printf(out, "%d", N->item);
+	}
+}
 
 
 //Returns a new List representing the same integer sequence as this
