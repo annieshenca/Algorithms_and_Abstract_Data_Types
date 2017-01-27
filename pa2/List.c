@@ -183,15 +183,10 @@ void clear(List L){
 		exit(EXIT_FAILURE);
 	}
 	//printf("@clear(), before freeList(&L)\n");
-	freeList(L);
-	L->head = NULL;
-	L->tail = NULL;
-	L->cursor = NULL;
-	L->cIndex = -1;
-	L->numItems = 0;
-//	while(length(L) != 0){
-//		deleteBack(L);
-//	}
+	//freeList(*L);
+	while(length(L) != 0){
+		deleteBack(L);
+	}
 	//printf("end of clear\n");
 }
 
