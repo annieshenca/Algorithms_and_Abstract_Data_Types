@@ -33,7 +33,7 @@ typedef struct ListObj{
 
 //Constructors-Destructor ----------------------------------------
 
-//newNode()
+//newNode(int item)
 //Returns reference to new Node object. Initializes item, next, and prev fields.
 Node newNode(int item) {
     Node N = malloc(sizeof(NodeObj));
@@ -43,7 +43,7 @@ Node newNode(int item) {
     return(N);
 }
 
-//freeNode()
+//freeNode(Node* pN)
 //Frees heap memory pointed to by *pN, sets *pN to NULL.
 void freeNode(Node* pN){
     if( pN!=NULL && *pN!=NULL ){
@@ -65,7 +65,7 @@ List newList(void){
 	return L;
 }
 
-//freeList()
+//freeList(List* pL)
 //Frees all heap memory associated with List *pL, and sets *pL to NULL.
 void freeList(List* pL){
 	if(pL != NULL && *pL != NULL){
@@ -81,7 +81,7 @@ void freeList(List* pL){
 
 //Access functions ---------------------------------------------
 
-//length()
+//length(List L)
 //Returns the number of elements in this List.
 int length(List L){
 	if(L == NULL){
@@ -91,7 +91,7 @@ int length(List L){
 	return L->numItems;
 }
 
-//index()
+//index(List L)
 //If cursor is defined, returns the index of the cursor element, otherwise returns -1.
 int index(List L){
 	if(L == NULL){
@@ -104,7 +104,7 @@ int index(List L){
 	return L->cIndex;
 }
 
-//front()
+//front(List L)
 //Returns front element.
 //Pre: L != NULL, length()>0
 int front(List L){
@@ -118,7 +118,7 @@ int front(List L){
 	return L->head->item;
 }
 
-//back()
+//back(List L)
 //Returns back element. Pre: length()>0
 int back(List L){
 	if(L == NULL){
@@ -131,7 +131,7 @@ int back(List L){
 	return L->tail->item;
 }
 
-//get()
+//get(List L)
 //Returns cursor element. Pre: length()>0, index()>=0
 int get(List L){
 	if(L == NULL){
@@ -147,7 +147,7 @@ int get(List L){
 	return L->cursor->item;
 }
 
-//equals(List A, List B)
+//equals(List, List)
 //Returns true if A and B are the same integer sequence.
 //The cursor is ignored in both lists.
 int equals(List A, List B){
@@ -174,7 +174,7 @@ int equals(List A, List B){
 	return 1;
 }
 
-//clear()
+//clear(List L)
 //Resets this List to its original empty state.
 void clear(List L){
 	//printf("just got in clear\n");
@@ -190,7 +190,7 @@ void clear(List L){
 	//printf("end of clear\n");
 }
 
-//moveFront()
+//moveFront(List L)
 //If List is non-empty, places the cursor under the front
 //element, otherwise does nothing.
 void moveFront(List L){
@@ -204,7 +204,7 @@ void moveFront(List L){
 	}
 }
 
-//moveBack()
+//moveBack(List L)
 //If List is non-empty, places the cursor under the back element,
 //otherwise does nothing.
 void moveBack(List L){
@@ -218,7 +218,7 @@ void moveBack(List L){
 	}
 }
 
-//movePrev()
+//movePrev(List L)
 //If cursor is defined and not at front, moves cursor one step toward
 //front of this List, if cursor is defined and at front, cursor becomes
 //undefined, if cursor is undefined does nothing.
@@ -237,7 +237,7 @@ void movePrev(List L){
 	//Do nothing if cursor is undefined
 }
 
-//moveNext()
+//moveNext(List L)
 //If cursor is defined and not at back, moves cursor one step toward
 //back of this List, if cursor is defined and at back, cursor becomes
 //undefined, if cursor is undefined does nothing.
@@ -365,7 +365,7 @@ void insertAfter(List L, int data){
 	L->numItems++;
 }
 
-//deleteFront()
+//deleteFront(List L)
 //Deletes the front element. Pre: length()>0
 void deleteFront(List L){
 	if(L == NULL){
@@ -387,7 +387,7 @@ void deleteFront(List L){
 	L->numItems--;
 }
 
-//deleteBack()
+//deleteBack(List L)
 //Deletes the back element. Pre: length()>0
 void deleteBack(List L){
 	if(L == NULL){
@@ -410,7 +410,7 @@ void deleteBack(List L){
 	L->numItems--;
 }
 
-//delete()
+//delete(List L)
 //Deletes cursor element, making cursor undefined.
 //Pre: length()>0, index()>=0
 void delete(List L){
@@ -441,6 +441,7 @@ void delete(List L){
 	}
 }
 
+//printList(FILE, List)
 void printList(FILE* out, List L){
 	if(L == NULL){
 		printf("printList() Error: calling on NULL list.\n");
@@ -456,7 +457,7 @@ void printList(FILE* out, List L){
 	}
 }
 
-
+//copyList(List L)
 //Returns a new List representing the same integer sequence as this
 //List. The cursor in the new list is undefined, regardless of the
 //state of the cursor in this List. This List is unchanged.
@@ -480,9 +481,3 @@ List copyList(List L){
 ////states of the cursors in this List and L. The states of this List
 ////and L are unchanged.
 //List concatList(List A, List B);
-
-
-
-
-
-

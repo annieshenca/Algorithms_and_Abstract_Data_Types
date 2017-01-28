@@ -8,7 +8,7 @@
 #include "List.h"
 
 int main(int argc, char* argv[]){
-   
+
    List A = newList();
    List B = newList();
    List C = NULL;
@@ -37,7 +37,6 @@ int main(int argc, char* argv[]){
    printf("%s\n", equals(A,B)?"true":"false");
    printf("%s\n", equals(B,C)?"true":"false");
    printf("%s\n", equals(C,A)?"true":"false");
-
 
    moveFront(A);
    for(i=0; i<5; i++) moveNext(A); // at index 5

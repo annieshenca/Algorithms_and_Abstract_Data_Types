@@ -1,8 +1,8 @@
 /*
  * Annie Shen
  * ashen7 #1562848
- * CMPS 101 pa2
- * Due Jan 27, 2016
+ * CMPS101 pa2
+ * Due Jan 28, 2016
  * Lex.c
  */
 
@@ -21,6 +21,8 @@ int main(int argc, char*argv[]){
 	//char* string;
 	int lineNum = 0;
     int chara = 0;
+
+
 	//Open files for reading and writing
 	in = fopen(argv[1], "r"); //"r" for reading
 	out = fopen(argv[2], "w"); //"w" for writing
@@ -34,6 +36,7 @@ int main(int argc, char*argv[]){
 		exit(1);
 	}
 
+	//Count number of lines in the in file
 	while(chara != EOF){ //EOF = "end of file"
 		chara = fgetc(in); //fgetc() gets the next character from in file
 		if(chara == '\n'){ //If the character is a next line, then increment lineNum
@@ -43,32 +46,35 @@ int main(int argc, char*argv[]){
 	printf("Line number count: %i\n", lineNum);
 	fclose(in);
 
-//	in = fopen(argv[1], "");
+	//while(fgets(str, 300, out) != NULL){
+
+
+
+	//}
+
 //	String[] str = new String[lineNum];
 //	while(in.hasNextLine()){
 //		str[n] = in.nextLine();
 //		n++;
 //	}
 
-
 //------------------------------------------------------------------------
-/*
-	List A = newList();
 
-	append(A, 0); //First item counts as already sorted
+	List L = newList();
+
+	append(L, 0); //First item counts as already sorted
 	//For the rest of the elements
 	for(int j=1; j < lineNum; j++){
-        int i = 0;
+        //int i = 0; //Start from the first index
         
-        moveFront(A);
-
+        moveFront(L);
 
 	}
 
 //	for(int j = 1; j < lineNum; j++){
 //		String temp = str[j];
-//		int i = 0; //Start from first inde
-//
+//		int i = 0; //Start from first index
+
 //		A.moveFront(); //Move cursor to the front
 //		while(A.index() != -1 && str[A.get()].compareTo(temp) < 0 && i<j){ //if str[i] is smaller than temp
 //			A.moveNext();
@@ -83,13 +89,16 @@ int main(int argc, char*argv[]){
 //	}
 //
 //	A.moveFront(); //Reset cursor to front again
-//	while(A.index() != -1){ //Stops when cursor is out of bound
-//		out.println(str[A.get()]); //Prints List into output file "out"
-//		A.moveNext();
-//	}
-*/
 
-	//Close read and write files
+//	}
+
+	moveFront(L);
+	while(index(L) != NULL){ //Stops when cursor is out of bound
+		fprintf(out, "%s"); //Prints List into output file "out"
+		moveNext(L);
+	}
+
+	//Close the read and write files
 	fclose(in);
 	fclose(out);
 
