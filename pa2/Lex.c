@@ -29,16 +29,23 @@ int main(int argc, char*argv[]){
 		printf("Unable to open file %s for reading\n", argv[1]);
 		exit(1);
 	}
-	if( out==NULL ){
+	if(out == NULL){
 		printf("Unable to open file %s for writing\n", argv[2]);
 		exit(1);
 	}
 
-
-	while(fgetc(in) != EOF){ //EOF = "End of File"
-		lineNum++;
+	int ch =0;
+	while(ch != EOF){
+		ch = fgetc(in);
+		if(ch == '\n'){
+			lineNum++;
+		}
 	}
-	printf("Line number count: %i", lineNum);
+
+//	while(fgetc(in) != EOF){ //EOF = "End of File"
+//		lineNum++;
+//	}
+	printf("Line number count: %i\n", lineNum);
 
 //	int n = 0;
 //	int lineNum = 0;
@@ -89,8 +96,10 @@ int main(int argc, char*argv[]){
 //		out.println(str[A.get()]); //Prints List into output file "out"
 //		A.moveNext();
 //	}
-//
-//	in.close();
+
+
+	//Close read and write files
+	fclose(in);
 	fclose(out);
 
 	return(EXIT_SUCCESS);
