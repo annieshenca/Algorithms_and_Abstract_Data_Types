@@ -29,18 +29,18 @@ int main(int argc, char*argv[]){
 		printf("Unable to open file %s for reading\n", argv[1]);
 		exit(1);
 	}
-//	if( out==NULL ){
-//		printf("Unable to open file %s for writing\n", argv[2]);
-//		exit(1);
-//	}
+	if( out==NULL ){
+		printf("Unable to open file %s for writing\n", argv[2]);
+		exit(1);
+	}
 
 //	int ch = 0;
 //	while(ch != EOF){
 //		ch = fgetc(in);
 //		if(ch == '\n')	lineNum++;
 //	}
-	printf("Line number count: %i", lineNum);
-
+	printf("Line number count: %i\n", lineNum);
+    printf("what is life no mo?");
 
 //	int n = 0;
 //	int lineNum = 0;
