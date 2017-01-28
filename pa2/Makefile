@@ -5,11 +5,11 @@
 #       make ListClient        makes ListClient
 #------------------------------------------------------------------------------
 
-#Lex : Lex.o List.o
-#	gcc -o Lex Lex.o List.o
+Lex : Lex.o List.o
+	gcc -o Lex Lex.o List.o
 
-#Lex.o : Lex.c List.h
-#	gcc -c -std=c99 -Wall Lex.c
+Lex.o : Lex.c List.h
+	gcc -c -std=c99 -Wall Lex.c
 
 ListClient: ListClient.o List.o
 	gcc -o ListClient ListClient.o List.o
@@ -24,4 +24,4 @@ clean :
 	rm -f Lex ListClient Lex.o ListClient.o List.o
 
 check:
-	valgrind --leak-check=yes $(EXEBIN)
+	valgrind --leak-check=yes Lex in1 out
