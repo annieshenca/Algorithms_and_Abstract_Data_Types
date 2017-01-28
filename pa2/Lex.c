@@ -18,8 +18,8 @@ int main(int argc, char*argv[]){
 
 	FILE* in;
 	FILE* out;
-	char* string;
-	int lineNum;
+	//char* string;
+	int lineNum = 0;
 
 	//Open files for reading and writing
 	in = fopen(argv[1], "r"); //"r" for reading
@@ -29,32 +29,19 @@ int main(int argc, char*argv[]){
 		printf("Unable to open file %s for reading\n", argv[1]);
 		exit(1);
 	}
-	if( out==NULL ){
-		printf("Unable to open file %s for writing\n", argv[2]);
-		exit(1);
-	}
+//	if( out==NULL ){
+//		printf("Unable to open file %s for writing\n", argv[2]);
+//		exit(1);
+//	}
 
-	while(fgetc(in) != NULL){
-		lineNum++;
-	}
+//	int ch = 0;
+//	while(ch != EOF){
+//		ch = fgetc(in);
+//		if(ch == '\n')	lineNum++;
+//	}
 	printf("Line number count: %i", lineNum);
 
-//	/* read each line of input file, then count and print tokens */
-//	while( fgetc(line, MAX_LEN, in) != NULL)  {
-//		count++;
-//		n = 0;
-//		token = strtok(line, " \n");
-//		tokenlist[0] = '\0';
-//		while( token!=NULL ){
-//			strcat(tokenlist, "   ");
-//			strcat(tokenlist, token);
-//			strcat(tokenlist, "\n");
-//			n++;
-//			token = strtok(NULL, " \n");
-//		}
-//		fprintf(out, "line %d contains %d token%s: \n", count, n, n==1?"":"s");
-//		fprintf(out, "%s\n", tokenlist);
-//	}
+
 //	int n = 0;
 //	int lineNum = 0;
 //	while(in.hasNextLine()) {//Count how many lines there are in the "in" file
