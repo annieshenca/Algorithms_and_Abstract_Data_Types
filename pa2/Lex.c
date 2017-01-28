@@ -20,7 +20,7 @@ int main(int argc, char*argv[]){
 	FILE* out;
 	//char* string;
 	int lineNum = 0;
-
+    int chara = 0;
 	//Open files for reading and writing
 	in = fopen(argv[1], "r"); //"r" for reading
 	out = fopen(argv[2], "w"); //"w" for writing
@@ -34,28 +34,16 @@ int main(int argc, char*argv[]){
 		exit(1);
 	}
 
-	int ch =0;
-	while(ch != EOF){
-		ch = fgetc(in);
-		if(ch == '\n'){
+	while(chara != EOF){ //EOF = "end of file"
+		chara = fgetc(in); //fgetc() gets the next character from in file
+		if(chara == '\n'){ //If the character is a next line, then increment lineNum
 			lineNum++;
 		}
 	}
-
-//	while(fgetc(in) != EOF){ //EOF = "End of File"
-//		lineNum++;
-//	}
 	printf("Line number count: %i\n", lineNum);
+	fclose(in);
 
-//	int n = 0;
-//	int lineNum = 0;
-//	while(in.hasNextLine()) {//Count how many lines there are in the "in" file
-//		lineNum++;
-//		in.nextLine();
-//	}
-//	fclose(in);
-//
-//	in = fopen(argv[1], "");
+	in = fopen(argv[1], "");
 //	String[] str = new String[lineNum];
 //	while(in.hasNextLine()){
 //		str[n] = in.nextLine();
@@ -65,14 +53,17 @@ int main(int argc, char*argv[]){
 
 //------------------------------------------------------------------------
 
-//	List A = newList();
-//
-//	append(A, 0); //First item counts as already sorted
-//	//For the rest of the elements
-//	for(int j=1; j < lineNum; j++){
-//
-//	}
+	List A = newList();
 
+	append(A, 0); //First item counts as already sorted
+	//For the rest of the elements
+	for(int j=1; j < lineNum; j++){
+        int i = 0;
+        
+        moveFront(L);
+
+
+	}
 
 //	for(int j = 1; j < lineNum; j++){
 //		String temp = str[j];
