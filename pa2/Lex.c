@@ -23,7 +23,7 @@ int main(int argc, char*argv[]){
 	char line[MAX_LEN];
 	//char inputArray[MAX_LEN][MAX_LEN];
 	int lineNum = 0;
-    int chara = 0;
+    char chara = 0;
 
 	//Open files for reading and writing
 	in = fopen(argv[1], "r"); //"r" for reading
@@ -47,6 +47,7 @@ int main(int argc, char*argv[]){
 	}
 	//printf("Line number count: %i\n", lineNum);
 	fclose(in);
+    in=fopen(argv[1],"r");
 
 	char inputArray[lineNum][MAX_LEN];
 	int x=0;
@@ -58,7 +59,7 @@ int main(int argc, char*argv[]){
 
 //------------------------------------------------------------------------
 //Insertion Sort
-/*	List L = newList();
+	List L = newList();
 	char* temp;
 	int i=0;
 	int z =0;
@@ -96,7 +97,7 @@ int main(int argc, char*argv[]){
 		free(&line[y]);
 		line[y]=NULL;
 	}
-*/
+
 	//Close the read and write files
 	fclose(in);
 	fclose(out);

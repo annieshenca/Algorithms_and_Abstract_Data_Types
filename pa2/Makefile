@@ -24,4 +24,4 @@ clean :
 	rm -f Lex ListClient Lex.o ListClient.o List.o
 
 check:
-	valgrind --leak-check=yes Lex in1 out
+	valgrind --leak-check=full Lex in1 out
