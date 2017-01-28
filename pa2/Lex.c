@@ -60,7 +60,7 @@ int main(int argc, char*argv[]){
 	for(int j=1; j < lineNum; j++){
         int i = 0;
         
-        moveFront(L);
+        moveFront(A);
 
 
 	}
