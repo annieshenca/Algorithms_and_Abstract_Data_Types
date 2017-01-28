@@ -34,13 +34,11 @@ int main(int argc, char*argv[]){
 		exit(1);
 	}
 
-//	int ch = 0;
-//	while(ch != EOF){
-//		ch = fgetc(in);
-//		if(ch == '\n')	lineNum++;
-//	}
-	printf("Line number count: %i\n", lineNum);
-    printf("what is life no mo?");
+
+	while(fgetc(in) != EOF){ //EOF = "End of File"
+		lineNum++;
+	}
+	printf("Line number count: %i", lineNum);
 
 //	int n = 0;
 //	int lineNum = 0;
