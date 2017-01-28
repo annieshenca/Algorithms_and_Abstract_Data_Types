@@ -43,7 +43,7 @@ int main(int argc, char*argv[]){
 	printf("Line number count: %i\n", lineNum);
 	fclose(in);
 
-	in = fopen(argv[1], "");
+//	in = fopen(argv[1], "");
 //	String[] str = new String[lineNum];
 //	while(in.hasNextLine()){
 //		str[n] = in.nextLine();
@@ -52,7 +52,7 @@ int main(int argc, char*argv[]){
 
 
 //------------------------------------------------------------------------
-
+/*
 	List A = newList();
 
 	append(A, 0); //First item counts as already sorted
@@ -87,7 +87,7 @@ int main(int argc, char*argv[]){
 //		out.println(str[A.get()]); //Prints List into output file "out"
 //		A.moveNext();
 //	}
-
+*/
 
 	//Close read and write files
 	fclose(in);
