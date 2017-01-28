@@ -2,13 +2,15 @@
  * Annie Shen
  * ashen7 #1562848
  * CMPS101 pa2
- * Due Jan 28, 2016
+ * Due Jan 28, 2017
  * Lex.c
  */
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "List.h"
+#define MAX_LEN 300
 
 int main(int argc, char*argv[]){
 	if(argc != 3){ //Check for in and out files
@@ -18,10 +20,10 @@ int main(int argc, char*argv[]){
 
 	FILE* in;
 	FILE* out;
-	//char* string;
+	char line[MAX_LEN];
+	//char inputArray[MAX_LEN][MAX_LEN];
 	int lineNum = 0;
     int chara = 0;
-
 
 	//Open files for reading and writing
 	in = fopen(argv[1], "r"); //"r" for reading
@@ -43,59 +45,56 @@ int main(int argc, char*argv[]){
 			lineNum++;
 		}
 	}
-	printf("Line number count: %i\n", lineNum);
+	//printf("Line number count: %i\n", lineNum);
 	fclose(in);
 
-	//while(fgets(str, 300, out) != NULL){
-
-
-
-	//}
-
-//	String[] str = new String[lineNum];
-//	while(in.hasNextLine()){
-//		str[n] = in.nextLine();
-//		n++;
-//	}
-
-//------------------------------------------------------------------------
-
-	List L = newList();
-
-	append(L, 0); //First item counts as already sorted
-	//For the rest of the elements
-	for(int j=1; j < lineNum; j++){
-        //int i = 0; //Start from the first index
-        
-        moveFront(L);
+	char inputArray[lineNum][MAX_LEN];
+	int x=0;
+	while(fgets(line, MAX_LEN, in) != NULL){
+		strcpy(inputArray[x], line);
+		x++;
 
 	}
 
-//	for(int j = 1; j < lineNum; j++){
-//		String temp = str[j];
-//		int i = 0; //Start from first index
+//------------------------------------------------------------------------
+//Insertion Sort
+	List L = newList();
+	char* temp;
+	int i=0;
+	int z =0;
+	append(L, 0); //First item counts as already sorted
+	//For the rest of the elements
+	for(int j=1; j < lineNum; j++){
+		temp = &line[j];
+		i = 0; //Start from the first index
 
-//		A.moveFront(); //Move cursor to the front
-//		while(A.index() != -1 && str[A.get()].compareTo(temp) < 0 && i<j){ //if str[i] is smaller than temp
-//			A.moveNext();
-//			i++;
-//		} //Gets out of while loop when str[A.get()] is BIGGER than temp
-//		// or i >= j
-//		if(A.index() == -1){ //If cursor fall off the array
-//			A.append(j);
-//		} else{ //if cursor is still active
-//			A.insertBefore(j);
-//		}
-//	}
-//
-//	A.moveFront(); //Reset cursor to front again
+		moveFront(L); //Move cursor to the front
+		z = get(L);
+		while(index(L) != -1){
+			while(strcmp(&line[z], temp) <0 && i<j){
+				//if str[i] is smaller than temp
+				moveNext(L);
+				i++;
+			} //Gets out of while loop when str[get(L)] is BIGGER than temp
+			if(index(L) == -1){ //If cursor fall off the array
+				append(L, j);
+			} else{ //if cursor is still active
+				insertBefore(L, j);
+			}
+		}
+	}
 
-//	}
-
+	//Printing to the out file
 	moveFront(L);
-	while(index(L) != NULL){ //Stops when cursor is out of bound
-		fprintf(out, "%s"); //Prints List into output file "out"
-		moveNext(L);
+	while(index(L) != -1){ //Stops when cursor is out of bound
+		fprintf(out, "%s", &line[get(L)]); //Prints List into output file "out"
+		moveNext(L); //Move cursor to the next
+	}
+
+	//free memories. Prevent memory leaks
+	for(int y = 0; y < lineNum; y++){
+		free(&line[y]);
+		line[y]=NULL;
 	}
 
 	//Close the read and write files
