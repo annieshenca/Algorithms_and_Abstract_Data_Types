@@ -58,7 +58,7 @@ int main(int argc, char*argv[]){
 
 //------------------------------------------------------------------------
 //Insertion Sort
-	List L = newList();
+/*	List L = newList();
 	char* temp;
 	int i=0;
 	int z =0;
@@ -96,7 +96,7 @@ int main(int argc, char*argv[]){
 		free(&line[y]);
 		line[y]=NULL;
 	}
-
+*/
 	//Close the read and write files
 	fclose(in);
 	fclose(out);
