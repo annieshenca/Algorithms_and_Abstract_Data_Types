@@ -92,7 +92,7 @@ int main(int argc, char*argv[]){
 	}
 
 	//free memories. Prevent memory leaks
-	for(int y = 0; y < lineNum; y++){
+    for(int y = 0; y < lineNum; y++){
 		free(&line[y]);
 		line[y]=NULL;
 	}
