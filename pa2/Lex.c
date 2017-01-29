@@ -57,22 +57,21 @@ int main(int argc, char*argv[]){
 
 	}
 
+    
+
 //------------------------------------------------------------------------
 //Insertion Sort
-	List L = newList();
+
+    List L = newList();
 	char* temp;
 	int i=0;
-	int z =0;
 	append(L, 0); //First item counts as already sorted
 	//For the rest of the elements
 	for(int j=1; j < lineNum; j++){
-		temp = &line[j];
+    	temp = inputArray[j];
 		i = 0; //Start from the first index
-
 		moveFront(L); //Move cursor to the front
-		z = get(L);
-		while(index(L) != -1){
-			while(strcmp(&line[z], temp) <0 && i<j){
+		while((index(L) != -1) && (strcmp(inputArray[get(L)], temp) < 0 && (i<j))){
 				//if str[i] is smaller than temp
 				moveNext(L);
 				i++;
@@ -83,20 +82,17 @@ int main(int argc, char*argv[]){
 				insertBefore(L, j);
 			}
 		}
-	}
+	
 
-	//Printing to the out file
+   //Printing to the out file
 	moveFront(L);
 	while(index(L) != -1){ //Stops when cursor is out of bound
-		fprintf(out, "%s", &line[get(L)]); //Prints List into output file "out"
+		fprintf(out, "%s", inputArray[get(L)]); //Prints List into output file "out"
 		moveNext(L); //Move cursor to the next
 	}
 
 	//free memories. Prevent memory leaks
-    for(int y = 0; y < lineNum; y++){
-		free(&line[y]);
-		line[y]=NULL;
-	}
+    freeList(&L);    
 
 	//Close the read and write files
 	fclose(in);
