@@ -1,27 +1,31 @@
 Annie Shen
-ashen7
+ashen7@ucsc.edu
 1562848
 CMPS101 pa2
 Due Jan 28, 2017
 
 Table of Content:
--Lex.c
--List.c
--List.h
--ListClient.c
--Makefile
--README
-(Total files: 6 files)
+-List.c             written by me
+-List.h             written by me
+-ListClient.c       provided on webpage
+-Lex.c              written by me
+-Makefile           provided on webpage
+-README             written by me
+(Total of files: 6)
 
-Descriptions:
-README: Includes Table of Content and descriptions and purposes of files.
+Description:
+-List.c: List ADT functions. Functions to insure the client will
+            run without problems.
 
-Lex.c:
+-List.h: Header file. Includes declared functions and links the List and client together.
 
-List.c:
+-ListClient.c: c test file. Testing List.c functions.
 
-List.h:
+-Lex.c: Lex.c takes two command line arguments (input and output
+           file), and use List.c ADT to reorder the input file in
+           lexicographic order, then print to output file.
 
-ListClient.c: A given C file for testing purposes.
+-Makefile: A building tool used to simplify the compiling and removing
+           the files.
 
-Makefile: 
+-README: Table of content and description of files.
