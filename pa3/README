@@ -1,0 +1,29 @@
+Annie Shen
+ashen7@ucsc.edu
+ID#1562848
+CMPS 101 - pa3
+
+Table of Content:
+-Sparse.java        written by me
+-Matrix.java        written by me
+-List.java          written by me, modified from pa1
+-MatrixTest.java    written by me
+-ListTest.java      written by me
+-Makefile           provided on class website
+-README             written by me
+(total of files: 7)
+
+Description:
+-Sparse.java:
+
+-Matrix.java:
+
+-List.java:
+
+-MatrixTest.java: A test file to test if the functions in Matrix.java works correctly or not.
+
+-ListTest.java: A test file to test if the functions in List.java works correctly or not.
+
+-Makefile: A building tool used to simplify the compiling and removing of files.
+
+-README: Includes student information, table of content, and description of files.
