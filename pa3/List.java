@@ -1,5 +1,3 @@
-import Matrix.Entry;
-
 /*
  * Annie Shen (ashen7@ucsc.edu)
  * ID#1562848
@@ -25,6 +23,10 @@ public class List {
 					return true;
 				} else	return false;
 			}else 	return false;
+		}
+		
+		public String toString(){
+			return item.toString();
 		}
 	}
 	
@@ -101,15 +103,15 @@ public class List {
 			Node A = head;
 			Node B = L.head;
 			while(A != null && B != null){
-				if(A.item == B.item){
+				if(A.item.equals(B.item)){
 					//If items match up, set next node as the new head and continue comparing
 					A = A.next;
 					B = B.next;
 				} else	return false; //when one item doesn't match up with the other
 			}
-			return true;
-		} else	return false;
-	}
+			return true; //True if loop through all and are all equals
+		} else	return false; //If x is NOT instanceof List
+	} //End of equals
 	
 	//clear()
 	//Resets this List to its original empty state.
