@@ -8,8 +8,8 @@
 public class ListTest {
 	
 	public static void main(String[] args) {
-		List A = new List();
-		List B = new List();
+		Holdup A = new Holdup();
+		Holdup B = new Holdup();
 		
 	    for(int i=1; i<=20; i++) {
 	    	A.append(i);

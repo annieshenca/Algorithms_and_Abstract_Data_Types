@@ -53,7 +53,7 @@ public class Matrix{
 		}
 		//Size of n x n matrix
 		size = n;
-	}
+	} //End of Matrix(int n)
 	
 	//dot(List P, List Q)
 	//
@@ -66,13 +66,13 @@ public class Matrix{
 	//Returns n, the number of rows and columns of this Matrix
 	int getSize(){
 		return size;
-	}
+	} //End of getSize()
 	
 	//getNNZ()
 	//Returns the number of non-zero entries in this Matrix
 	int getNNZ(){
 		return NNZ;
-	}
+	} //End of getNNZ;
 	
 	//boolean equals(Object x)
 	//Overrides Object's equals() method
@@ -85,14 +85,14 @@ public class Matrix{
 				return false;
 			} else{ //If the size match up
 				for(int k = 1; k <= getSize(); k++){	
-					if(!(matrix[k].equals(M.matrix[k]))){
+					if(!(this.matrix[k].equals(M.matrix[k]))){
 						return false;
 					}
 				}
 				return true;
 			}
 		}else 	return false; //If x is NOT an instanceof Entry
-	}
+	} //End of equals(Object x)
 	
 	//Manipulation procedures--------------------------------
 	//makeZero()
@@ -101,8 +101,7 @@ public class Matrix{
 		for(int i = 1; i <= getSize(); i++){
 			matrix[i] = new List();
 		}
-		
-	}
+	} //End of makeZero
 	
 	//Matrix copy()
 	//Returns a new Matrix having the same entries as this Matrix
@@ -112,7 +111,6 @@ public class Matrix{
 		for(int i = 1; i <= getSize(); i++){
 			matrix[i].moveFront();
 			while( matrix[i].index() != -1){
-				
 				int a = ((Entry)matrix[i].get()).column;
 				double b =((Entry)matrix[i].get()).data;
 				copy.changeEntry(i, a, b);
@@ -120,7 +118,7 @@ public class Matrix{
 			}
 		}
 		return copy;
-	}
+	} //End of copy
 	
 	//changeEntry(int i, int j, double x)
 	//Changes ith row, jth column of this Matrix to x
@@ -134,9 +132,8 @@ public class Matrix{
 		}
 		
 		if(x != 0.0){
-			//System.out.println("bitch");
+			//System.out.println("here?");
 			matrix[i].moveFront();
-			//*****NOTE: check if x is 0.0 or duplicate*****//
 			
 			if(matrix[i].length() == 0){
 				matrix[i].prepend(new Entry(j,x));
@@ -150,7 +147,6 @@ public class Matrix{
 				} else{
 					matrix[i].insertBefore(new Entry(j,x));
 				}
-				
 			}
 			NNZ++;
 		}
@@ -199,49 +195,38 @@ public class Matrix{
 	
 	//Matrix transpose()
 	//Returns a new Matrix that is the transpose of this Matrix
+	//Taking this.matrix's row and store into trans's columns
 	Matrix transpose()
 	{
-		Matrix trans = new Matrix(this.getSize());
-		int i = 1;
-		int j = 1; //Start i at 1 for trans
+		Matrix trans = new Matrix(this.getSize()); //Create a new matrix to store transpose into
+		int i; int j; //Initialize i for this.matrix and j for trans
 		double x;
 
-		for(i=1; i <= getSize(); i++) //j for copy
+		for(i=1; i <= getSize(); i++)
 		{
-			this.matrix[i].moveFront(); //Start copy's list i's cursor at front
-			 //Move copy at list j 's cursor to the front
-			j=1;
-			while(this.matrix[i].index() != -1) //while there's nodes to be read in copy's list j
-			{
+			this.matrix[i].moveFront(); //Start this.matrix's list i's cursor at front
+			j = 1; //Restart j at 1;
+			while(this.matrix[i].index() != -1) 
+			{//while there's nodes to be read in this.matrix's list j
 				x = ((Entry)this.matrix[i].get()).data;
-				trans.changeEntry(j, i, x);
+				trans.changeEntry(j, i, x); //changeEntry trans to store the data 
 				j++;
-				this.matrix[i].moveNext();
+				this.matrix[i].moveNext(); //Move the cursor to next element
 			}
 		}
 		return trans;
+		//Failed attempt
 //		copy.matrix[i].moveFront();
-//		//System.out.println("I'm here");
-//		//System.out.println(trans.matrix[i].index);
 //		while(copy.matrix[i] != null){
 //			for(int j = 1; j <= getSize(); j++){
-//				//System.out.println("and then I'm here");
 //				trans.matrix[j].moveFront();
-//				//System.out.println("and then I'm here");
-//				System.out.println(trans.matrix[j].index);
-//				//int aColumn = ((Entry)copy.matrix[i].get()).column;
 //				double aData = ((Entry)copy.matrix[i].get()).data;
-//			
-//				//int bColumn = ((Entry)trans.matrix[j].get()).column;
 //				double bData = ((Entry)trans.matrix[j].get()).data;
-//			
 //				bData = aData;
 //				((Entry)trans.matrix[j].get()).data = bData;
-//			
 //				copy.matrix[i].moveNext();
-//			
-//				//((Entry)M.matrix[i].get()).data = a;
-//				//M.matrix[i].moveNext();
+//				((Entry)M.matrix[i].get()).data = a;
+//				M.matrix[i].moveNext();
 //			}
 //		}
 	}
