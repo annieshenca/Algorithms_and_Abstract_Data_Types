@@ -20,8 +20,10 @@ public class Matrix{
 		}
 		
 		public boolean equals(Object x){
+			//System.out.println("here?");
 			if(x instanceof Entry){
 				Entry E = (Entry)x;
+
 				if(this.column == E.column && this.data == E.data){
 					return true;		
 				} else	return false;
@@ -77,21 +79,24 @@ public class Matrix{
 	//boolean equals(Object x)
 	//Overrides Object's equals() method
 	public boolean equals(Object x){
-		if(x instanceof Entry){
+		int k;
+		if(x instanceof Matrix){
 			Matrix M = (Matrix)x;
-			if(this.size != M.size){
-				//If the length of both arrays don't match up, then there's no point of
-				//keep on going and compare.
+			if(this.getSize() != M.getSize()){
 				return false;
-			} else{ //If the size match up
-				for(int k = 1; k <= getSize(); k++){	
-					if(!(this.matrix[k].equals(M.matrix[k]))){
+			} else{
+				for(k = 1; k <= this.getSize(); k++){
+					List a = M.matrix[k];
+					List b = this.matrix[k];
+
+					if(!(a.equals(b))){
+						//System.out.println("k: " + k);
 						return false;
 					}
 				}
-				return true;
 			}
-		}else 	return false; //If x is NOT an instanceof Entry
+			return true;
+		}else	return false; //If x is NOT an instanceof Entry
 	} //End of equals(Object x)
 	
 	//Manipulation procedures--------------------------------
@@ -106,16 +111,18 @@ public class Matrix{
 	//Matrix copy()
 	//Returns a new Matrix having the same entries as this Matrix
 	Matrix copy(){
+	
 		Matrix copy = new Matrix(getSize());
-
+		
 		for(int i = 1; i <= getSize(); i++){
-			matrix[i].moveFront();
+			this.matrix[i].moveFront();
+
 			while( matrix[i].index() != -1){
 				int a = ((Entry)matrix[i].get()).column;
-				double b =((Entry)matrix[i].get()).data;
+				double b = ((Entry)matrix[i].get()).data;
 				copy.changeEntry(i, a, b);
-				matrix[i].moveNext();
-			}
+				this.matrix[i].moveNext();
+			}	
 		}
 		return copy;
 	} //End of copy
@@ -132,7 +139,6 @@ public class Matrix{
 		}
 		
 		if(x != 0.0){
-			//System.out.println("here?");
 			matrix[i].moveFront();
 			
 			if(matrix[i].length() == 0){
@@ -148,19 +154,24 @@ public class Matrix{
 					matrix[i].insertBefore(new Entry(j,x));
 				}
 			}
+
+			System.out.println("changeEntry index: "+matrix[i].index());
+			System.out.println("changeEntry length: "+matrix[i].length());
 			NNZ++;
 		}
 	}
 	
 	//private double dot(List A, List B)
 	//Computes the vector dot product of two matrix rows of List A and B
-//	private double dot(List A, List B){
-//		for(int n =1; n <= getSize(); n++){
-//			
-//			
-//			
-//		}
-//	}
+	private double dot(List A, List B){
+		double data = 0.0;
+		A.moveFront();
+		B.moveFront();
+		while(A.index() != -1 && B.index() != -1){
+			
+		}
+		return data;
+	}
 
 	//Matrix scalarMult(double x)
 	//Returns a new Matrix that is the scalar product of this Matrix with x

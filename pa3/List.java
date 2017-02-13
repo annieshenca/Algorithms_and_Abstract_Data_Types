@@ -19,7 +19,8 @@ public class List {
 		public boolean equals(Object x){
 			if(x instanceof Node){
 				Node N = (Node)x;
-				if(this.item.equals(N.item)){
+				
+				if(N.item.equals(this.item)){
 					return true;
 				} else	return false;
 			}else 	return false;
@@ -93,24 +94,29 @@ public class List {
 	//Returns true if this List and L are the same integer sequence.
 	//The cursor is ignored in both lists.
 	public boolean equals(Object x) {
+		System.out.println("WOAH");
 		List L = (List)x;
-		if(x instanceof List){
-			if(length() != L.length()){
+		//if(x instanceof List){
+		System.out.println("*******"+L.length()); //3
+		System.out.println("*******"+this.length()); //4
+			if(L.length() != numItems){
 				//If length of both lists don't match up, then return false right away
 				//because there's no need to continue comparing
 				return false;
 			}
-			Node A = head;
+
+			Node A = this.head;
 			Node B = L.head;
-			while(A != null){
-				if(A.item.equals(B.item)){
+			
+			while(A != null && B != null){
+				if(A.equals(B)){
 					//If items match up, set next node as the new head and continue comparing
 					A = A.next;
 					B = B.next;
 				} else	return false; //when one item doesn't match up with the other
 			}
 			return true; //True if loop through all and are all equals
-		} else	return false; //If x is NOT instanceof List
+		//} else	return false; //If x is NOT instanceof List
 	} //End of equals
 	
 	//clear()
