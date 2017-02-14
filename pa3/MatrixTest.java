@@ -1,9 +1,15 @@
+/*
+ * Annie Shen (ashen7@ucsc.edu)
+ * ID#1562848
+ * CMPS 101 pa3
+ * MatrixTest.java
+ */
+
 public class MatrixTest {
 	public static void main(String[] args){
 		int n=1000;
 		Matrix A = new Matrix(n);
 		Matrix B = new Matrix(n);
-		
 
 		A.changeEntry(2,2,5); B.changeEntry(2,2,1);
 		A.changeEntry(1,3,3); B.changeEntry(1,3,1);
@@ -14,17 +20,6 @@ public class MatrixTest {
 		A.changeEntry(1,2,2); B.changeEntry(1,2,0);
 		A.changeEntry(3,3,9); B.changeEntry(3,3,1);
 		A.changeEntry(2,1,4); B.changeEntry(2,1,0);
-
-		
-//      A.changeEntry(1,1,1); B.changeEntry(1,1,1);
-//      A.changeEntry(1,2,2); B.changeEntry(1,2,0);
-//      A.changeEntry(1,3,3); B.changeEntry(1,3,1);
-//      A.changeEntry(2,1,4); B.changeEntry(2,1,0);
-//      A.changeEntry(2,2,5); B.changeEntry(2,2,1);
-//      A.changeEntry(2,3,6); B.changeEntry(2,3,0);
-//      A.changeEntry(3,1,7); B.changeEntry(3,1,1);
-//      A.changeEntry(3,2,8); B.changeEntry(3,2,1);
-//      A.changeEntry(3,3,9); B.changeEntry(3,3,1);
 
 		System.out.println("A:");
 		System.out.println("A NNZ: " + A.getNNZ());
@@ -37,22 +32,22 @@ public class MatrixTest {
 		System.out.println("B.trans NNZ: " + B.transpose().getNNZ());
 		System.out.println(B.transpose());
 		
-//		System.out.println("Printing C = A.copy():");
-//		Matrix C = A.copy();
-//		System.out.println("C NNZ: " + C.getNNZ());
-//		System.out.println(C);
-//		
-//		System.out.println("A == A?: " + A.equals(A));
-//		System.out.println("A == B?: " + A.equals(B));
-//		System.out.println("B == C?: " + B.equals(C));
-//		System.out.println("A == C?: " + A.equals(C));
-//		System.out.println();
-//		
-//		System.out.println("Printing D = A.scalarMult(1.5):");
-//		Matrix D = A.scalarMult(1.5);
-//		//System.out.println(A);
-//		System.out.println("D NNZ: " + D.getNNZ());
-//		System.out.println(D);
+		System.out.println("Printing C = A.copy():");
+		Matrix C = A.copy();
+		System.out.println("C NNZ: " + C.getNNZ());
+		System.out.println(C);
+		
+		System.out.println("A == A?: " + A.equals(A));
+		System.out.println("A == B?: " + A.equals(B));
+		System.out.println("B == C?: " + B.equals(C));
+		System.out.println("A == C?: " + A.equals(C));
+		System.out.println();
+		
+		System.out.println("Printing D = A.scalarMult(1.5):");
+		Matrix D = A.scalarMult(1.5);
+		//System.out.println(A);
+		System.out.println("D NNZ: " + D.getNNZ());
+		System.out.println(D);
 		
 		System.out.println("E1 = B.mult(B):");
 		Matrix E1 = B.mult(B);

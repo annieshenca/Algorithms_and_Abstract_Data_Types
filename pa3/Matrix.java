@@ -35,10 +35,9 @@ public class Matrix{
 			return str;
 		}
 		
-	}//End of Entry
+	}//End Entry
 	
-	//Constructor--------------------------------------------
-	
+	//Constructor***********************************************************
 	private List[] matrix; //Array of lists
 	private int size; //size of matrix
 	private int NNZ; //number of non-zero entries
@@ -55,26 +54,20 @@ public class Matrix{
 		}
 		//Size of n x n matrix
 		size = n;
-	} //End of Matrix(int n)
+	} //End Matrix
 	
-	//dot(List P, List Q)
-	//
-//	private static double dot(List P, List Q){
-//		return 0;
-//	}
-	
-	//Access functions---------------------------------------
+	//Access functions***********************************************************
 	//getSize()
 	//Returns n, the number of rows and columns of this Matrix
 	int getSize(){
 		return size;
-	} //End of getSize()
+	} //End getSize()
 	
 	//getNNZ()
 	//Returns the number of non-zero entries in this Matrix
 	int getNNZ(){
 		return NNZ;
-	} //End of getNNZ;
+	} //End getNNZ;
 	
 	//boolean equals(Object x)
 	//Overrides Object's equals() method
@@ -99,7 +92,7 @@ public class Matrix{
 		}else	return false; //If x is NOT an instanceof Entry
 	} //End of equals(Object x)
 	
-	//Manipulation procedures--------------------------------
+	//Manipulation procedure*********************************
 	//makeZero()
 	//Sets this Matrix to the zero state
 	void makeZero(){
@@ -107,26 +100,25 @@ public class Matrix{
 			matrix[i] = new List();
 		}
 		NNZ=0;
-	} //End of makeZero
+	} //End  makeZero
 	
 	//Matrix copy()
 	//Returns a new Matrix having the same entries as this Matrix
 	Matrix copy(){
-	
 		Matrix copy = new Matrix(getSize());
 		
 		for(int i = 1; i <= getSize(); i++){
-			this.matrix[i].moveFront();
+			this.matrix[i].moveFront(); //Move cursor to the front
 
-			while( matrix[i].index() != -1){
+			while( matrix[i].index() != -1){ //While the cursor doesn't fall off yet
 				int a = ((Entry)matrix[i].get()).column;
 				double b = ((Entry)matrix[i].get()).data;
-				copy.changeEntry(i, a, b);
-				this.matrix[i].moveNext();
+				copy.changeEntry(i, a, b); //copy the column and data
+				this.matrix[i].moveNext(); //Move cursor to the next
 			}	
 		}
 		return copy;
-	} //End of copy
+	} //End copy
 	
 	//changeEntry(int i, int j, double x)
 	//Changes ith row, jth column of this Matrix to x
@@ -159,7 +151,7 @@ public class Matrix{
 			//System.out.println("changeEntry length: "+ this.matrix[i].length());
 			NNZ++;
 		}
-	}
+	} //End changeEntry
 	
 	//Matrix transpose()
 	//Returns a new Matrix that is the transpose of this Matrix
@@ -197,7 +189,7 @@ public class Matrix{
 //				M.matrix[i].moveNext();
 //			}
 //		}
-		}
+		} //End transpose
 	
 	//private double dot(List A, List B)
 	//Computes the vector dot product of two matrix rows of List A and B
@@ -226,7 +218,7 @@ public class Matrix{
 			
 		}
 		return data;
-	}
+	} //End dot
 	
 	//Matrix scalarMult(double x)
 	//Returns a new Matrix that is the scalar product of this Matrix with x
@@ -244,29 +236,6 @@ public class Matrix{
 		}
 		return M;
 	}
-	
-	//Matrix mult(Matrix M)
-	//Returns a new Matrix that is the product of this Matrix with M
-	//Pre: getSize()==M.getSize()
-	Matrix mult(Matrix M){
-		if(this.getSize() != M.getSize()){
-			throw new RuntimeException("mult Error: getSize() != M.getSize()");
-		}
-		
-		double x = 0.0;
-		Matrix N = M.transpose(); //Transpose the Matrix M
-		Matrix product = new Matrix(getSize()); //For storing multiplied matrices result
-		//System.out.println("result size: " + result.getSize());
-		for(int i = 1; i <= getSize(); i++){
-			for(int j = 1; j <= getSize(); j++){
-				x = dot(this.matrix[i], N.matrix[j]); //Perform dot product on two lists
-				if(x != 0){
-					product.changeEntry(i, j, x);
-				}
-			}
-		}
-		return product;
-	} //End of mult
 	
 	//Matrix add(Matrix M)
 	//Returns a new Matrix that is the sum of this Matrix with M
@@ -330,8 +299,6 @@ public class Matrix{
 		return N;
 	} //End add
 	
-	//*******************************************************************
-	
 	//Matrix sub(Matrix M)
 	//Returns a new Matrix that is the difference of this Matrix with M
 	//Pre: getSize()==M.getSize()
@@ -340,7 +307,7 @@ public class Matrix{
 			throw new RuntimeException("add Error: getSize() != M.getSize()");
 		}
 		
-		Matrix N = new Matrix(getSize()); //New matrix to store the sum of two matrices
+		Matrix N = new Matrix(getSize()); //New matrix to store the difference of two matrices
 		
 		if(M == this){ //If subtracting the matrix M to itself
 			return N; //Meaning returning an all zero entries matrix
@@ -393,9 +360,32 @@ public class Matrix{
 		} //End for loop
 		
 		return N;
-	}
-
-//	//Other functions------------------------------------
+	} //End sub
+	
+	//Matrix mult(Matrix M)
+	//Returns a new Matrix that is the product of this Matrix with M
+	//Pre: getSize()==M.getSize()
+	Matrix mult(Matrix M){
+		if(this.getSize() != M.getSize()){
+			throw new RuntimeException("mult Error: getSize() != M.getSize()");
+		}
+		
+		double x = 0.0;
+		Matrix N = M.transpose(); //Transpose the Matrix M
+		Matrix product = new Matrix(getSize()); //For storing multiplied matrices result
+		//System.out.println("result size: " + result.getSize());
+		for(int i = 1; i <= getSize(); i++){
+			for(int j = 1; j <= getSize(); j++){
+				x = dot(this.matrix[i], N.matrix[j]); //Perform dot product on two lists
+				if(x != 0){ //If x(the data) is not zero
+					product.changeEntry(i, j, x);
+				}
+			}
+		}
+		return product;
+	} //End of mult
+	
+	//Other functions*******************************************************
 	//toString()
 	//Overrides Object's toString() method
 	public String toString(){
@@ -406,6 +396,6 @@ public class Matrix{
 			}
 		}
 		return str;
-	}
+	} //End toString
 
 }
