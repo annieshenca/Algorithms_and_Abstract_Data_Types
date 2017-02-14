@@ -82,7 +82,7 @@ public class Sparse {
 		out.println(A.mult(B));
 		
 		out.println("B*B =");
-		out.println(B.mult(B));
+		out.print(B.mult(B));
 		
 		//Close input and output files
 		in.close();
