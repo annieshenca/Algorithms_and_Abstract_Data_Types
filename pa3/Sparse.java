@@ -44,12 +44,12 @@ public class Sparse {
 				A.changeEntry(Integer.parseInt(in.next()), Integer.parseInt(in.next()), Double.parseDouble(in.next()));
 				lineNum++;
 				
-			} else if(lineNum == a+1){
-				in.nextLine(); //Skip the middle empty line
-				// if(lineNum-a <= b)
-			} else{ //Storing Matrix B row, column, and data
+			} else if(lineNum-a <= b){ //Storing Matrix B row, column, and data
 				B.changeEntry(Integer.parseInt(in.next()), Integer.parseInt(in.next()), Double.parseDouble(in.next()));
 				lineNum++;
+				
+			} else{
+				in.nextLine(); //Skip the middle empty line
 			}
 		} //End while
 		
