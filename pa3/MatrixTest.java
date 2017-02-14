@@ -1,6 +1,6 @@
 public class MatrixTest {
 	public static void main(String[] args){
-		int n=3;
+		int n=1000;
 		Matrix A = new Matrix(n);
 		Matrix B = new Matrix(n);
 		
@@ -26,11 +26,10 @@ public class MatrixTest {
 //      A.changeEntry(3,2,8); B.changeEntry(3,2,1);
 //      A.changeEntry(3,3,9); B.changeEntry(3,3,1);
 
-		System.out.println("Printing A:");
+		System.out.println("A:");
 		System.out.println("A NNZ: " + A.getNNZ());
 		System.out.println(A);
-		
-		System.out.println("Printing B:");
+		System.out.println("B:");
 		System.out.println("B NNZ: " + B.getNNZ());
 		System.out.println(B);
 		
@@ -55,31 +54,56 @@ public class MatrixTest {
 //		System.out.println("D NNZ: " + D.getNNZ());
 //		System.out.println(D);
 		
-		System.out.println("Printing E = B.mult(B):");
-		Matrix E = B.mult(B);
-		System.out.println("E NNZ: " + E.getNNZ());
+		System.out.println("E1 = B.mult(B):");
+		Matrix E1 = B.mult(B);
+		System.out.println("E1 NNZ: " + E1.getNNZ());
+		System.out.println(E1);
+		
+		System.out.println("E2 = A.mult(B):");
+		Matrix E2 = A.mult(B);
+		System.out.println("E2 NNZ: " + E2.getNNZ());
+		System.out.println(E2);
+		
+		System.out.println("F1 = A.add(A):");
+		Matrix F1 = A.add(A);
+		System.out.println("F1 NNZ: " + F1.getNNZ());
+		System.out.println(F1);
+		
+		System.out.println("F2 = A.add(B):");
+		Matrix F2 = A.add(B);
+		System.out.println("F2 NNZ: " + F2.getNNZ());
+		System.out.println(F2);
+		
+		System.out.println("F3 = B.add(B.trans):");
+		Matrix F3 = B.add(B.transpose());
+		System.out.println("F3 NNZ: " + F3.getNNZ());
+		System.out.println(F3);
+		
+		System.out.println("F4 = E1.add(B.scalarMult(2):");
+		Matrix F4 = E1.add(B.scalarMult(2));
+		System.out.println("F4 NNZ: " + F4.getNNZ());
+		System.out.println(F4);
+		
+		System.out.println("F5 = F4.add(E2):");
+		Matrix F5 = F4.add(E2);
+		System.out.println("F5 NNZ: " + F5.getNNZ());
+		System.out.println(F5);
+		
+		System.out.println("F6 = A.add(an empty matrix)");
+		Matrix empty = new Matrix(n);
+		Matrix F6 = empty.add(A);
+		System.out.println("F6 NNZ: " + F6.getNNZ());
+		System.out.println(F6);
+		
+		System.out.println("HELLO E=A.sub(B)");
+		Matrix E = B.sub(A);
+		System.out.println(E.getNNZ());
 		System.out.println(E);
 		
-		System.out.println("Printing F = A.mult(B):");
-		Matrix F = A.mult(B);
-		System.out.println("F NNZ: " + F.getNNZ());
-		System.out.println(F);
-		
-		System.out.println("Printing G = A.add(A):");
-		Matrix G = A.add(A);
-		System.out.println("G NNZ: " + G.getNNZ());
-		System.out.println(G);
-
-		
-		
-//      Matrix E = A.sub(A);
-//      System.out.println(E.getNNZ());
-//      System.out.println(E);
-		
-//		System.out.println("A.makeZero():");
-//      A.makeZero();
-//      System.out.println("NNZ: " + A.getNNZ());
-//      System.out.println(A);
+		System.out.println("A.makeZero():");
+		A.makeZero();
+		System.out.println("NNZ: " + A.getNNZ());
+		System.out.println(A);
 		
 		System.out.print("End of MatrixTest.java");
 	}

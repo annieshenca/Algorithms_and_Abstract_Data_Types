@@ -106,6 +106,7 @@ public class Matrix{
 		for(int i = 1; i <= getSize(); i++){
 			matrix[i] = new List();
 		}
+		NNZ=0;
 	} //End of makeZero
 	
 	//Matrix copy()
@@ -254,41 +255,146 @@ public class Matrix{
 		
 		double x = 0.0;
 		Matrix N = M.transpose(); //Transpose the Matrix M
-		Matrix result = new Matrix(getSize()); //For storing multiplied matrices result
+		Matrix product = new Matrix(getSize()); //For storing multiplied matrices result
 		//System.out.println("result size: " + result.getSize());
 		for(int i = 1; i <= getSize(); i++){
 			for(int j = 1; j <= getSize(); j++){
 				x = dot(this.matrix[i], N.matrix[j]); //Perform dot product on two lists
 				if(x != 0){
-					result.changeEntry(i, j, x);
+					product.changeEntry(i, j, x);
 				}
 			}
 		}
-		return result;
+		return product;
 	} //End of mult
 	
 	//Matrix add(Matrix M)
 	//Returns a new Matrix that is the sum of this Matrix with M
 	//Pre: getSize()==M.getSize()
+	//If two matrices are the same || If two nodes are both numbers,
+	//if one node is number and the other is not ||
 	Matrix add(Matrix M){
 		if(this.getSize() != M.getSize()){
 			throw new RuntimeException("add Error: getSize() != M.getSize()");
 		}
 		
+		if(M == this){ //If adding the matrix M to itself
+			return this.copy().scalarMult(2); //Could be treated as itself multiplied by 2
+		}
 		
-	}
+		Matrix N = new Matrix(getSize()); //New matrix to store the sum of two matrices
+		int i;
+		int Tc, Mc; //List A and B 's columns
+		double Td, Md; //List A and B 's data
+		
+		for(i = 1;i <= getSize(); i++){
+			this.matrix[i].moveFront();
+			M.matrix[i].moveFront();
+			
+			while(this.matrix[i].index() != -1 || M.matrix[i].index() != -1){
+				
+				if(this.matrix[i].index() != -1 && M.matrix[i].index() != -1){
+					Tc = ((Entry)this.matrix[i].get()).column;
+					Mc = ((Entry)M.matrix[i].get()).column;
+					Td = ((Entry)this.matrix[i].get()).data;
+					Md = ((Entry)M.matrix[i].get()).data;
+					if(Tc < Mc){
+						//If this column number is smaller than M column number,
+						//meaning M entry contains a zero
+						N.changeEntry(i, Tc, Td);
+						this.matrix[i].moveNext();
+					} else if(Tc > Mc){
+						//If this column number is bigger than M column number,
+						//meaning this entry contains a zero
+						N.changeEntry(i, Mc, Md);
+						M.matrix[i].moveNext();
+					} else{ //if(Tc == Mc)
+						//If this column number is the same as M column number,
+						//meaning this and M both entries that are non-zeros
+						N.changeEntry(i, Tc, (Td+Md));
+						this.matrix[i].moveNext();
+						M.matrix[i].moveNext();
+					} //End if else
+				
+				} else if(this.matrix[i].index() != -1){
+					N.changeEntry(i, ((Entry)this.matrix[i].get()).column, ((Entry)this.matrix[i].get()).data);
+					this.matrix[i].moveNext();
+				} else{ //M.matrix[i].index() != -1
+					N.changeEntry(i, ((Entry)M.matrix[i].get()).column, ((Entry)M.matrix[i].get()).data);
+					M.matrix[i].moveNext();
+				}
+			} //End while loop
+			
+		} //End for loop
+		
+		return N;
+	} //End add
 	
 	//*******************************************************************
 	
 	//Matrix sub(Matrix M)
 	//Returns a new Matrix that is the difference of this Matrix with M
 	//Pre: getSize()==M.getSize()
-//	Matrix sub(Matrix M){
-//		
-//	}
+	Matrix sub(Matrix M){
+		if(this.getSize() != M.getSize()){
+			throw new RuntimeException("add Error: getSize() != M.getSize()");
+		}
+		
+		Matrix N = new Matrix(getSize()); //New matrix to store the sum of two matrices
+		
+		if(M == this){ //If subtracting the matrix M to itself
+			return N; //Meaning returning an all zero entries matrix
+		}
+		
+		int i;
+		int Tc, Mc; //List A and B 's columns
+		double Td, Md; //List A and B 's data
+		
+		for(i = 1;i <= getSize(); i++){
+			this.matrix[i].moveFront();
+			M.matrix[i].moveFront();
+			
+			while(this.matrix[i].index() != -1 || M.matrix[i].index() != -1){
+				
+				if(this.matrix[i].index() != -1 && M.matrix[i].index() != -1){
+					Tc = ((Entry)this.matrix[i].get()).column;
+					Mc = ((Entry)M.matrix[i].get()).column;
+					Td = ((Entry)this.matrix[i].get()).data;
+					Md = ((Entry)M.matrix[i].get()).data;
+					if(Tc < Mc){
+						//If this column number is smaller than M column number,
+						//meaning M entry contains a zero
+						N.changeEntry(i, Tc, Td);
+						this.matrix[i].moveNext();
+					} else if(Tc > Mc){
+						//If this column number is bigger than M column number,
+						//meaning this entry contains a zero
+						N.changeEntry(i, Mc, -Md);
+						M.matrix[i].moveNext();
+					} else{ //if(Tc == Mc)
+						//If this column number is the same as M column number,
+						//meaning this and M both entries that are non-zeros
+						if((Td-Md) != 0){
+							N.changeEntry(i, Tc, (Td-Md));
+						}
+						this.matrix[i].moveNext();
+						M.matrix[i].moveNext();
+					} //End if else
+				
+				} else if(this.matrix[i].index() != -1){
+					N.changeEntry(i, ((Entry)this.matrix[i].get()).column, ((Entry)this.matrix[i].get()).data);
+					this.matrix[i].moveNext();
+				} else{ //M.matrix[i].index() != -1
+					N.changeEntry(i, ((Entry)M.matrix[i].get()).column, -((Entry)M.matrix[i].get()).data);
+					M.matrix[i].moveNext();
+				}
+			} //End while loop
+			
+		} //End for loop
+		
+		return N;
+	}
 
-
-	
 //	//Other functions------------------------------------
 	//toString()
 	//Overrides Object's toString() method
