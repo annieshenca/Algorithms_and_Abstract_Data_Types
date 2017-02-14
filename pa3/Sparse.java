@@ -49,8 +49,7 @@ public class Sparse {
 			} else if(lineNum-a <= b){ //Storing Matrix B row, column, and data
 				B.changeEntry(Integer.parseInt(in.next()), Integer.parseInt(in.next()), Double.parseDouble(in.next()));
 				lineNum++;
-			} else	in.nextLine(); //Skip the middle empty line
-			
+			}
 		} //End while
 		
 		//Printing out matrix functions
