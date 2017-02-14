@@ -154,75 +154,31 @@ public class Matrix{
 					matrix[i].insertBefore(new Entry(j,x));
 				}
 			}
-
-			System.out.println("changeEntry index: "+matrix[i].index());
-			System.out.println("changeEntry length: "+matrix[i].length());
+			//System.out.println("changeEntry index: "+matrix[i].index());
+			//System.out.println("changeEntry length: "+ this.matrix[i].length());
 			NNZ++;
 		}
 	}
 	
-	//private double dot(List A, List B)
-	//Computes the vector dot product of two matrix rows of List A and B
-	private double dot(List A, List B){
-		double data = 0.0;
-		A.moveFront();
-		B.moveFront();
-		while(A.index() != -1 && B.index() != -1){
-			
-		}
-		return data;
-	}
-
-	//Matrix scalarMult(double x)
-	//Returns a new Matrix that is the scalar product of this Matrix with x
-	Matrix scalarMult(double x){
-		Matrix M = this.copy();
-		
-		for(int i=1; i <= getSize(); i++){
-			M.matrix[i].moveFront();
-			while(M.matrix[i].index() != -1){
-				double a = ((Entry)M.matrix[i].get()).data;
-				a = a * x;
-				((Entry)M.matrix[i].get()).data = a;
-				M.matrix[i].moveNext();
-			}
-		}
-		return M;
-	}
-
-//	//Matrix add(Matrix M)
-//	//Returns a new Matrix that is the sum of this Matrix with M
-//	//Pre: getSize()==M.getSize()
-//	Matrix add(Matrix M){
-//		
-//	}
-//	
-//	//Matrix sub(Matrix M)
-//	//Returns a new Matrix that is the difference of this Matrix with M
-//	//Pre: getSize()==M.getSize()
-//	Matrix sub(Matrix M){
-//		
-//	}
-	
 	//Matrix transpose()
 	//Returns a new Matrix that is the transpose of this Matrix
 	//Taking this.matrix's row and store into trans's columns
-	Matrix transpose()
-	{
+	Matrix transpose(){
 		Matrix trans = new Matrix(this.getSize()); //Create a new matrix to store transpose into
 		int i; int j; //Initialize i for this.matrix and j for trans
 		double x;
-
-		for(i=1; i <= getSize(); i++)
-		{
+		
+		for(i=1; i <= getSize(); i++){
 			this.matrix[i].moveFront(); //Start this.matrix's list i's cursor at front
 			j = 1; //Restart j at 1;
-			while(this.matrix[i].index() != -1) 
-			{//while there's nodes to be read in this.matrix's list j
-				x = ((Entry)this.matrix[i].get()).data;
-				trans.changeEntry(j, i, x); //changeEntry trans to store the data 
+			while(this.matrix[i].index() != -1){
+				//while there's nodes to be read in this.matrix's list j
+				if(j == ((Entry)this.matrix[i].get()).column){
+					x = ((Entry)this.matrix[i].get()).data;
+					trans.changeEntry(j, i, x); //changeEntry trans to store the data 
+					this.matrix[i].moveNext(); //Move the cursor to next element
+				}
 				j++;
-				this.matrix[i].moveNext(); //Move the cursor to next element
 			}
 		}
 		return trans;
@@ -240,14 +196,98 @@ public class Matrix{
 //				M.matrix[i].moveNext();
 //			}
 //		}
+		}
+	
+	//private double dot(List A, List B)
+	//Computes the vector dot product of two matrix rows of List A and B
+	private static double dot(List A, List B){
+		double data = 0.0;
+		A.moveFront();
+		B.moveFront();
+		int Ac, Bc; //List A and B 's columns
+		double Ad, Bd; //List A and B 's datas
+		
+		while(A.index() != -1 && B.index() != -1){
+			Ac = ((Entry)A.get()).column;
+			Bc = ((Entry)B.get()).column;
+			Ad = ((Entry)A.get()).data;
+			Bd = ((Entry)B.get()).data;
+			//System.out.println("Ad: " + Ad);
+			if(Ac == Bc){
+				data += Ad * Bd;
+				A.moveNext();
+				B.moveNext();
+			}else if(Ac < Bc){
+				A.moveNext();
+			} else{ //if(Ac > Bc)
+				B.moveNext();
+			}
+			
+		}
+		return data;
 	}
 	
-//	//Matrix mult(Matrix M)
-//	//Returns a new Matrix that is the product of this Matrix with M
-//	//Pre: getSize()==M.getSize()
-//	Matrix mult(Matrix M){
+	//Matrix scalarMult(double x)
+	//Returns a new Matrix that is the scalar product of this Matrix with x
+	Matrix scalarMult(double x){
+		Matrix M = this.copy();
+		
+		for(int i=1; i <= getSize(); i++){
+			M.matrix[i].moveFront();
+			while(M.matrix[i].index() != -1){
+				double a = ((Entry)M.matrix[i].get()).data;
+				a = a * x;
+				((Entry)M.matrix[i].get()).data = a;
+				M.matrix[i].moveNext();
+			}
+		}
+		return M;
+	}
+	
+	//Matrix mult(Matrix M)
+	//Returns a new Matrix that is the product of this Matrix with M
+	//Pre: getSize()==M.getSize()
+	Matrix mult(Matrix M){
+		if(this.getSize() != M.getSize()){
+			throw new RuntimeException("mult Error: getSize() != M.getSize()");
+		}
+		
+		double x = 0.0;
+		Matrix N = M.transpose(); //Transpose the Matrix M
+		Matrix result = new Matrix(getSize()); //For storing multiplied matrices result
+		//System.out.println("result size: " + result.getSize());
+		for(int i = 1; i <= getSize(); i++){
+			for(int j = 1; j <= getSize(); j++){
+				x = dot(this.matrix[i], N.matrix[j]); //Perform dot product on two lists
+				if(x != 0){
+					result.changeEntry(i, j, x);
+				}
+			}
+		}
+		return result;
+	} //End of mult
+	
+	//Matrix add(Matrix M)
+	//Returns a new Matrix that is the sum of this Matrix with M
+	//Pre: getSize()==M.getSize()
+	Matrix add(Matrix M){
+		if(this.getSize() != M.getSize()){
+			throw new RuntimeException("add Error: getSize() != M.getSize()");
+		}
+		
+		
+	}
+	
+	//*******************************************************************
+	
+	//Matrix sub(Matrix M)
+	//Returns a new Matrix that is the difference of this Matrix with M
+	//Pre: getSize()==M.getSize()
+//	Matrix sub(Matrix M){
 //		
 //	}
+
+
 	
 //	//Other functions------------------------------------
 	//toString()

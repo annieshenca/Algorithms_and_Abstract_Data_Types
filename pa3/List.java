@@ -94,11 +94,8 @@ public class List {
 	//Returns true if this List and L are the same integer sequence.
 	//The cursor is ignored in both lists.
 	public boolean equals(Object x) {
-		System.out.println("WOAH");
 		List L = (List)x;
 		//if(x instanceof List){
-		System.out.println("*******"+L.length()); //4
-		System.out.println("*******"+this.length()); //3
 		if(L.length() != numItems){
 			//If length of both lists don't match up, then return false right away
 			//because there's no need to continue comparing
@@ -245,6 +242,7 @@ public class List {
 			temp.next = A;
 			A.next = cursor;
 			A.prev = temp;
+			numItems++;
 //			if(temp != null){
 //				temp.next = A; //The old cursor.prev now is in front of node A
 //				A.prev = temp;
@@ -254,7 +252,7 @@ public class List {
 //            }
 		}
 		cIndex++;
-		numItems++;
+		
 	}
 	
 	//insertAfter(int data)
