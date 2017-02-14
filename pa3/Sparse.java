@@ -43,13 +43,14 @@ public class Sparse {
 			if(lineNum <= a){ //Storing Matrix A row, column, and data
 				A.changeEntry(Integer.parseInt(in.next()), Integer.parseInt(in.next()), Double.parseDouble(in.next()));
 				lineNum++;
-			}
-			in.nextLine(); //Skip the middle empty line
-			lineNum = 1; //Reset lineNum to 1
-			if(lineNum <= b){ //Storing Matrix B row, column, and data
+				
+			} else if(lineNum == a+1){
+				in.nextLine(); //Skip the middle empty line
+			} else if(lineNum-a <= b){ //Storing Matrix B row, column, and data
 				B.changeEntry(Integer.parseInt(in.next()), Integer.parseInt(in.next()), Double.parseDouble(in.next()));
 				lineNum++;
-			}
+			} else	in.nextLine(); //Skip the middle empty line
+			
 		} //End while
 		
 		//Printing out matrix functions
