@@ -345,8 +345,10 @@ public class List {
 	public String toString(){
 		StringBuffer sb = new StringBuffer();
 		Node N = head;
+		String space = "";
 		for( ; N != null; N = N.next){
-			sb.append(N.item + " ");
+			sb.append(space + N.item);
+			space = " ";
 		}
 		return sb.toString();
 	}	
