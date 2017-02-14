@@ -73,16 +73,16 @@ public class Sparse {
 		out.println(B.sub(A));
 		
 		out.println("A-A =");
-		out.print(A.sub(A));
+		out.println(A.sub(A));
 		
 		out.println("Transpose(A) =");
-		out.print(A.transpose());
+		out.println(A.transpose());
 		
 		out.println("A*B =");
-		out.print(A.mult(B));
+		out.println(A.mult(B));
 		
 		out.println("B*B =");
-		out.print(B.mult(B));
+		out.println(B.mult(B));
 		
 		//Close input and output files
 		in.close();
