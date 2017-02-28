@@ -242,16 +242,26 @@ void movePrev(List L){
 //back of this List, if cursor is defined and at back, cursor becomes
 //undefined, if cursor is undefined does nothing.
 void moveNext(List L){
-	if(L->cursor != NULL){
-		if(L->cursor == L->tail){
-			L->cursor = NULL;
-			L->cIndex = -1;
-		} else{
-			L->cursor = L->cursor->next;
-			L->cIndex++;
-		}
+	if(L == NULL){
+		printf("moveNext Error: calling on NULL List.\n");
+		exit(EXIT_FAILURE);
 	}
-	//Do nothing if cursor is null.
+//	if(L->cursor != NULL ){
+//		if(L->cursor == L->tail){
+//			L->cursor = NULL;
+//			L->cIndex = -1;
+//		} else{
+//			L->cursor = L->cursor->next;
+//			L->cIndex++;
+//		}
+//	}//Do nothing if cursor is null.
+	if(L->cursor != NULL && L->cursor == L->tail){
+		L->cursor = NULL;
+		L->cIndex = -1;
+	} else if(L->cursor != NULL && L->cursor != L->tail){
+		L->cursor = L->cursor->next;
+		L->cIndex++;
+	}//Do nothing if cursor is null.
 }
 
 //prepend(List L, int data)
@@ -304,29 +314,34 @@ void append(List L, int data){
 //Insert new element before cursor.
 //Pre: length()>0, index()>=0
 void insertBefore(List L, int data){
+	//printf("%p\n", L->cursor);
 	if(L == NULL){
 		printf("insertBefore() Error: calling on NULL list.\n");
 		exit(EXIT_FAILURE);
 	}
 	if(length(L) <= 0){ //If the list is empty
 		printf("insertBefore() Error: List is empty");
+		exit(EXIT_FAILURE);
 	}
 	if(index(L) < 0){ //If cursor index is invalid
 		printf("insertBefore() Error: invalid index");
+		exit(EXIT_FAILURE);
 	}
 
 	Node A = newNode(data);
 	if(length(L) == 1){ //if cursor is at head and null is in front of the cursor
 		L->cursor->prev = A; //Set the null before the cursor to be the new node
 		A->next = L->cursor; //Set new node's next as the cursor
+		L->head = A;//***
 	} else { // when length is more than 1, that cursor.prev is NOT a null
 		Node temp = L->cursor->prev; //Save current cursor.prev as a new node named temp
 		L->cursor->prev = A;
 		A->next = L->cursor;
 		if(temp != NULL){
 			temp->next = A; //The old cursor.prev now is in front of node A
-			A->prev = temp;
+			//A->prev = temp;
 		}
+		A->prev = temp;
 		if(L->cursor == L->head){
 			L->head = A;
 		}
@@ -350,17 +365,26 @@ void insertAfter(List L, int data){
 	if(index(L) < 0){
 		printf("insertAfter() Error: invalid index");
 	}
-
 	Node A = newNode(data);
+	Node temp = L->cursor->next;
 	if(length(L) == 1){ //if cursor is at head and null is after the cursor
 		L->cursor->next = A;
 		A->prev = L->cursor;
+		A->next = temp;
 	} else { // when length is more than 1, that cursor.prev is NOT a null
-		Node temp = L->cursor->next; //Save current cursor.prev as a new node named temp
+		 //Save current cursor.prev as a new node named temp
 		L->cursor->next = A;
 		A->prev = L->cursor;
-		temp->prev = A; //The old cursor.prev now is in front of node A
 		A->next = temp;
+		//NEW********
+		if(temp != NULL){
+			temp->prev = A;
+		}
+		//NEW********
+		if(L->cursor == L->tail){
+			L->tail = A; //The old cursor.prev now is in front of node A
+		}
+		//A->next = temp;
 	}
 	L->numItems++;
 }
@@ -374,6 +398,7 @@ void deleteFront(List L){
 	}
 	if(length(L) <= 0){
 		printf("deleteFront() Error: List is empty");
+		exit(EXIT_FAILURE);
 	}
 	Node temp = L->head;
 	if(length(L) == 1){ //If the list has only one element
@@ -397,12 +422,20 @@ void deleteBack(List L){
 	if(length(L) <= 0){
 		printf("deleteBack() Error: List is empty");
 	}
-
 	Node temp = L->tail;
-	L->tail = L->tail->prev;
-        if(L->tail == NULL){ //If the list has only one element
-		L->head = NULL; //Reset
-        }
+	//NEW********
+	if(length(L) == 1){ //if only one element
+		L->head = L->tail = L->cursor = NULL; //Reset
+		L->cIndex = -1;
+	} else{
+		L->tail = L->tail->prev;
+		L->tail->next = NULL;
+	//NEW********
+//	if(L->tail == NULL){ //If the list has only one element
+//		L->head = NULL; //Reset
+//	}
+//	temp->prev = NULL;
+	}
 	freeNode(&temp);
 	L->numItems--;
 }
@@ -417,9 +450,11 @@ void delete(List L){
 	}
 	if(length(L) <= 0){
 		printf("delete() Error: List is empty");
+		exit(EXIT_FAILURE);
 	}
 	if(index(L) < 0){
 		printf("delete() error: invalid index");
+		exit(EXIT_FAILURE);
 	}
 	Node temp = L->cursor;
 	if(L->cIndex == 0){ //If cursor is at head
@@ -444,13 +479,15 @@ void printList(FILE* out, List L){
 		printf("printList() Error: calling on NULL list.\n");
 		exit(EXIT_FAILURE);
 	}
+	//NEW********
 	//if(L->numItems == 0){
 	//	printf("printList() Error: calling empty list.");
 	//	exit(EXIT_FAILURE);
 	//}
+	//NEW********
 	Node N = L->head;
 	for(; N != NULL; N = N->next){
-		fprintf(out, "%d ", N->item);
+		printf("%d ", N->item);
 	}
 }
 
