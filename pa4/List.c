@@ -10,7 +10,7 @@
 #include<stdlib.h>
 #include"List.h"
 
-//structs -------------------------------------------------------
+//Structs -------------------------------------------------------
 
 //Private NodeObj type
 typedef struct NodeObj{
@@ -95,8 +95,8 @@ int length(List L){
 //If cursor is defined, returns the index of the cursor element, otherwise returns -1.
 int index(List L){
 	if(L == NULL){
-			printf("index() Error: calling on NULL list.\n");
-			exit(EXIT_FAILURE);
+		printf("index() Error: calling on NULL list.\n");
+		exit(EXIT_FAILURE);
 	}
 	if(L->cursor == NULL){
 		return -1; //set cursor index out of range
@@ -177,17 +177,13 @@ int equals(List A, List B){
 //clear(List L)
 //Resets this List to its original empty state.
 void clear(List L){
-	//printf("just got in clear\n");
 	if(L == NULL){
 		printf("clear() Error: calling on an empty list.\n");
 		exit(EXIT_FAILURE);
 	}
-	//printf("@clear(), before freeList(&L)\n");
-	//freeList(*L);
 	while(length(L) != 0){
 		deleteBack(L);
 	}
-	//printf("end of clear\n");
 }
 
 //moveFront(List L)
@@ -246,15 +242,6 @@ void moveNext(List L){
 		printf("moveNext Error: calling on NULL List.\n");
 		exit(EXIT_FAILURE);
 	}
-//	if(L->cursor != NULL ){
-//		if(L->cursor == L->tail){
-//			L->cursor = NULL;
-//			L->cIndex = -1;
-//		} else{
-//			L->cursor = L->cursor->next;
-//			L->cIndex++;
-//		}
-//	}//Do nothing if cursor is null.
 	if(L->cursor != NULL && L->cursor == L->tail){
 		L->cursor = NULL;
 		L->cIndex = -1;
@@ -376,15 +363,12 @@ void insertAfter(List L, int data){
 		L->cursor->next = A;
 		A->prev = L->cursor;
 		A->next = temp;
-		//NEW********
 		if(temp != NULL){
 			temp->prev = A;
 		}
-		//NEW********
 		if(L->cursor == L->tail){
 			L->tail = A; //The old cursor.prev now is in front of node A
 		}
-		//A->next = temp;
 	}
 	L->numItems++;
 }
@@ -423,18 +407,13 @@ void deleteBack(List L){
 		printf("deleteBack() Error: List is empty");
 	}
 	Node temp = L->tail;
-	//NEW********
+
 	if(length(L) == 1){ //if only one element
 		L->head = L->tail = L->cursor = NULL; //Reset
 		L->cIndex = -1;
 	} else{
 		L->tail = L->tail->prev;
 		L->tail->next = NULL;
-	//NEW********
-//	if(L->tail == NULL){ //If the list has only one element
-//		L->head = NULL; //Reset
-//	}
-//	temp->prev = NULL;
 	}
 	freeNode(&temp);
 	L->numItems--;
@@ -476,18 +455,12 @@ void delete(List L){
 //printList(FILE, List)
 void printList(FILE* out, List L){
 	if(L == NULL){
-		printf("printList() Error: calling on NULL list.\n");
+		fprintf(out, "printList() Error: calling on NULL list.\n");
 		exit(EXIT_FAILURE);
 	}
-	//NEW********
-	//if(L->numItems == 0){
-	//	printf("printList() Error: calling empty list.");
-	//	exit(EXIT_FAILURE);
-	//}
-	//NEW********
 	Node N = L->head;
 	for(; N != NULL; N = N->next){
-		printf("%d ", N->item);
+		fprintf(out, "%d ", N->item);
 	}
 }
 
@@ -509,9 +482,3 @@ List copyList(List L){
 	freeNode(&temp);
 	return cp;
 }
-
-////Returns a new List which is the concatenation of this list followed
-////by L. The cursor in the new List is undefined, regardless of the
-////states of the cursors in this List and L. The states of this List
-////and L are unchanged.
-//List concatList(List A, List B);
