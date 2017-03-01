@@ -187,7 +187,7 @@ void makeNull(Graph G){
 		G->dist[i] = NIL; //== 0
 		G->parent[i] = INF; //== -1
 	}
-	//G->numVertex = 0;
+	//G->numVertex = 0; //Don't change number of vertices
 	G->numEdge = 0;
 	G->source = NIL; //not discovered. == 0
 }
@@ -255,6 +255,7 @@ void addEdge(Graph G, int u, int v){
 			insertBefore(V, u);
 		}
 	}
+	G->numEdge++;
 //	free(&U);
 //	free(&V);
 }
@@ -303,6 +304,7 @@ void addArc(Graph G, int u, int v){
 			insertBefore(U, v);
 		}
 	}
+	G->numEdge++;
 }
 
 //BFS()
@@ -315,45 +317,48 @@ void BFS(Graph G, int s){
 		exit(EXIT_FAILURE);
 	}
 	//G->source = s;
-	int x = 0;
-	//int y = 0;
 	for(int i = 1; i< getOrder(G); i++){
 		G->color[i] = WHITE;
 		G->dist[i] = INF;
 		G->parent[i] = NIL;
 	}
-
+	int i = 0;
+	int j = 0;
 	G->color[s] = GREY; //discovered! but not done yet
 	G->dist[s] = 0; //distance of source is always 0
 	G->parent[s] = NIL; //source has no parent
 	List Q = newList();
 	append(Q, s); //insert source into list Q
-	while(length(Q) != 0){
-		x = front(Q); //save the front element of list Q as x
-		deleteFront(Q); //pop off queue
-		moveFront(G->list[x]);
-		for(int y = 1; y < getOrder(G); y++){
-			if(G->color[y] == WHITE){
-				G->color[y] = GREY;
-				G->dist[y] = G->dist[x] + 1;
-				G->parent[y] = s;
-				//enqueue(Q,j);
+	while(length(Q) > 0){
+		i = front(Q); //save the front element of list Q as x
+		deleteFront(Q); //pop off list Q
+		moveFront(G->list[i]); //place cursor at the front of the list Q
+		while(index(G->list[i]) != -1){ //while the cursor is in bound
+			j = get(G->list[i]); //y = the element the cursor is currently pointing to
+			if(G->color[j] == WHITE){ //if the current element has not been discovered yet, discover it!
+				G->color[j] = GREY; //discovered
+				G->dist[j] = G->dist[i] + 1; //distance is 1 more than it's parent distance
+				G->parent[j] = i; //y is the child of x
+				append(Q,j);
 			}
+			moveNext(G->list[i]); //move to next element on it's list
 		}
-		//G->color[i] = GREY;
-	}
-
-}
+		G->color[i] = BLACK; //all elements in it's list has been discovered and done!
+	} //end of while
+	//prevent memory leak
+	freeList(&Q);
+	Q = NULL;
+}//end BFS()
 
 /********************* Other operations *********************/
 //printGraph()
 //prints the adjacency list representation of G to the file pointed to by out
 //pre: G != NULL
 void printGraph(FILE* out, Graph G){
-//	if(G == NULL){
-//		fprintf(out, "printGraph error: calling NULL Graph.");
-//		exit(EXIT_FAILURE);
-//	}
+	if(G == NULL){
+		fprintf(out, "printGraph error: calling NULL Graph.");
+		exit(EXIT_FAILURE);
+	}
 	for(int i = 1; i < getOrder(G) + 1; i++){
 		fprintf(out, "%d: ", i); //"i: "
 		if(G->list[i] == NULL){ //if the list is empty
@@ -364,4 +369,4 @@ void printGraph(FILE* out, Graph G){
 		}
 		fprintf(out, "\n"); //new line
 	}
-}
+} //end printGraph()

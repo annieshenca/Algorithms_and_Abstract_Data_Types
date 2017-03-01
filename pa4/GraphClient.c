@@ -25,77 +25,82 @@
 #include<stdlib.h>
 #include"Graph.h"
 
-int main(){
-	Graph g = newGraph(5);
-	freeGraph(&g);
-	g = newGraph(5);
-	printf("vertices: %i\n",getOrder(g));
-	printf("edges: %i\n",getSize(g));
-	printf("distance: %i\n",getDist(g,1));
-	printf("parent: %i\n",getParent(g,1));
-	//printf("%i\n",getParent(g,0));
-	//printf("%i\n",getDist(g,6));
-	printf("get dist: %i\n",getDist(g,5));
-	freeGraph(&g);
-	//printf("%i\n",getDist(g,5));
-	g = newGraph(5);
-	addEdge(g,1,2);
-	addEdge(g,1,3);
-	addEdge(g,1,4);
-	addEdge(g,2,3);
-	//addEdge(g,6,1);
-	//addEdge(g,0,1);
-	//addEdge(g,5,0);
-	//addEdge(g,5,6);
-	printf("size: %i\n",getSize(g));
-	printGraph(stdout,g);
+int main(int argc, char* argv[]){
+   int i, s, max, min, d, n=35;
+   List  C = newList(); // central vertices
+   List  P = newList(); // peripheral vertices
+   List  E = newList(); // eccentricities
+   Graph G = NULL;
+   printf("hey");
+   // Build graph G
+   G = newGraph(n);
+   printf("hey");
+   for(i=1; i<n; i++){
+	  printf("hey");
+      if( i%7!=0 ) addEdge(G, i, i+1);
+      if( i<=28  ) addEdge(G, i, i+7);
 
-	makeNull(g);
-	printGraph(stdout,g);
-	g = newGraph(6);
-	addEdge(g,1,3);
-	addEdge(g,1,2);
-	addEdge(g,2,4);
-	addEdge(g,2,5);
-	addEdge(g,2,6);
-	addEdge(g,3,4);
-	addEdge(g,4,5);
-	addEdge(g,5,6);
-	printGraph(stdout,g);
-//	int s = 3;
-//	int d = 2;
-//	BFS(g,s);
-//	List l = newList();
-//	printf("The distance from %i to %i is %i\n",s,d,getDist(g,d));
-//	getPath(l,g,2);
-//	printList(stdout,l);
-//	makeNull(g);
-	freeGraph(&g);
-//	return 0;
+   }
+   addEdge(G, 9, 31);
+   addEdge(G, 17, 13);
+   addEdge(G, 14, 33);
+
+   // Print adjacency list representation of G
+   printGraph(stdout, G);
+//
+//   // Calculate the eccentricity of each vertex
+//   for(s=1; s<=n; s++){
+//      BFS(G, s);
+//      max = getDist(G, 1);
+//      for(i=2; i<=n; i++){
+//         d = getDist(G, i);
+//         max = ( max<d ? d : max );
+//      }
+//      append(E, max);
+//   }
+//
+//   // Determine the Radius and Diameter of G, as well as the Central and
+//   // Peripheral vertices.
+//   append(C, 1);
+//   append(P, 1);
+//   min = max = front(E);
+//   moveFront(E);
+//   moveNext(E);
+//   for(i=2; i<=n; i++){
+//      d = get(E);
+//      if( d==min ){
+//         append(C, i);
+//      }else if( d<min ){
+//         min = d;
+//         clear(C);
+//         append(C, i);
+//      }
+//      if( d==max ){
+//         append(P, i);
+//      }else if( d>max ){
+//         max = d;
+//         clear(P);
+//         append(P, i);
+//      }
+//      moveNext(E);
+//   }
+//
+//   // Print results
+//   printf("\n");
+//   printf("Radius = %d\n", min);
+//   printf("Central vert%s: ", length(C)==1?"ex":"ices");
+//   printList(stdout, C);
+//   printf("\n");
+//   printf("Diameter = %d\n", max);
+//   printf("Peripheral vert%s: ", length(P)==1?"ex":"ices");
+//   printList(stdout, P);
+//   printf("\n");
+
+   // Free objects
+   freeList(&C);
+   freeList(&P);
+   freeList(&E);
+   freeGraph(&G);
+
+   return(0);
 }
-
-//5
-//0
-//-1
-//0
-//get dist-1
-//size: 4
-//1: 2 3 4
-//2: 1 3
-//3: 1 2
-//4: 1
-//5:
-//1:
-//2:
-//3:
-//4:
-//5:
-//1: 2 3
-//2: 1 4 5 6
-//3: 1 4
-//4: 2 3 5
-//5: 2 4 6
-//6: 2 5
-//The distance from 3 to 2 is 2
-//3 1 2
-//Process finished with exit code 0
