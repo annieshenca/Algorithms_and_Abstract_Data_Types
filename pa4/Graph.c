@@ -41,7 +41,7 @@ Graph newGraph(int n){
 	graph->numVertex = n; //given n = number of vertices the new Graph has
 	graph->numEdge = 0;
 	graph->source = NIL; //undefined vertex
-	for(int i = 1; i < n; i++){
+	for(int i = 1; i < n+1; i++){
 		graph->list[i] = newList();
 		graph->color[i] = WHITE; 	//color = 0(white)
 		graph->dist[i] = INF; 	//distance = infinity
@@ -151,26 +151,31 @@ int getDist(Graph G, int u){
 //appends to the List L the vertices of a shortest path in G from source
 //to u, or appends to L the value NIL if no such path exists
 //pre: getSource(G) != NIL, 1 <= u <= getOrder(G) (number of vertices)
-void getPath(List L, Graph G, int u){
-	if(G == NULL){
-		printf("getPath error: calling NULL Graph.");
-		exit(EXIT_FAILURE);
-	}
-	if(u < 1){
-		printf("getPath error: vertex u < 1.");
-		exit(EXIT_FAILURE);
-	}
-	if(u > getOrder(G)){
-		printf("getPath error: vertex u > numVertex.");
-		exit(EXIT_FAILURE);
-	}
-//	if(getSource(G) == NIL){
-//		append(L,NIL);
-//	}else{
-//		append(L,u);
+//void getPath(List L, Graph G, int u){
+//	if(G == NULL){
+//		printf("getPath error: calling NULL Graph.");
+//		exit(EXIT_FAILURE);
 //	}
-
-}
+//	if(u < 1){
+//		printf("getPath error: vertex u < 1.");
+//		exit(EXIT_FAILURE);
+//	}
+//	if(u > getOrder(G)){
+//		printf("getPath error: vertex u > numVertex.");
+//		exit(EXIT_FAILURE);
+//	}
+//	if(getSource(G) == NIL){
+//		append(L, NIL);
+//	}else{
+//		if(G->parent[u] == NIL){
+//			append(L, u);
+//		}else{
+//			//uses recursion to find the highest parent, then come back and append elements into list L
+//			getPath(L,G,G->parent[u]);
+//			append(L, u);
+//		}
+//	}
+//}
 
 ///********************* Manipulation procedures *********************/
 //makeNull()
@@ -181,11 +186,11 @@ void makeNull(Graph G){
 		printf("makeNULL error: calling NULL Graph.");
 		exit(EXIT_FAILURE);
 	}
-	for(int i = 1; i < getOrder(G); i++){ //reset everything
+	for(int i = 1; i < getOrder(G)+1; i++){ //reset everything
 		clear(G->list[i]);
 		G->color[i] = WHITE; //== 0
-		G->dist[i] = NIL; //== 0
-		G->parent[i] = INF; //== -1
+		G->dist[i] = INF; //== -1
+		G->parent[i] = NIL; //== 0
 	}
 	//G->numVertex = 0; //Don't change number of vertices
 	G->numEdge = 0;
@@ -217,7 +222,6 @@ void addEdge(Graph G, int u, int v){
 		printf("getPath error: vertex u > numVertex.");
 		exit(EXIT_FAILURE);
 	}
-
 	//directed graphs. both ways
 	//from u to v first
 	List U = G->list[u];
@@ -359,7 +363,7 @@ void printGraph(FILE* out, Graph G){
 		fprintf(out, "printGraph error: calling NULL Graph.");
 		exit(EXIT_FAILURE);
 	}
-	for(int i = 1; i < getOrder(G) + 1; i++){
+	for(int i = 1; i < getOrder(G)+1; i++){
 		fprintf(out, "%d: ", i); //"i: "
 		if(G->list[i] == NULL){ //if the list is empty
 			//to avoid List ADT's printList error message from printList()
