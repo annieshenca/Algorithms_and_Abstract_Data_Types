@@ -221,11 +221,13 @@ void addEdge(Graph G, int u, int v){
 	//directed graphs. both ways
 	//from u to v first
 	List U = G->list[u];
-	moveFront(U);
+	//moveFront(U);
 	if(length(U) == 0){ //if length of list[u] is 0 == empty
 		prepend(U, v); //insert in the front
 	} else{
-		while(index(U) != -1 && U < v){
+		moveFront(U);
+
+		while(index(U) != -1 && get(U) < v){
 			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
 			moveNext(U);
 		}
@@ -238,11 +240,12 @@ void addEdge(Graph G, int u, int v){
 
 	//from v to u
 	List V = G->list[v];
-	moveFront(V);
+	//moveFront(V);
 	if(length(V) == 0){ //if length of list[u] is 0 == empty
 		prepend(V, u); //insert in the front
 	} else{
-		while(index(V) != -1 && V < u){
+		moveFront(V);
+		while(index(V) != -1 && get(V) < u){
 			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
 			moveNext(V);
 		}
@@ -252,8 +255,8 @@ void addEdge(Graph G, int u, int v){
 			insertBefore(V, u);
 		}
 	}
-	free(&U);
-	free(&V);
+//	free(&U);
+//	free(&V);
 }
 
 //addArc

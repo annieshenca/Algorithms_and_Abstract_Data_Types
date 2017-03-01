@@ -84,10 +84,10 @@ void freeList(List* pL){
 //length(List L)
 //Returns the number of elements in this List.
 int length(List L){
-	if(L == NULL){
-		printf("length() Error: calling on NULL list.\n");
-		exit(EXIT_FAILURE);
-	}
+//	if(L == NULL){
+//		printf("length() Error: calling on NULL list.\n");
+//		exit(EXIT_FAILURE);
+//	}
 	return L->numItems;
 }
 
