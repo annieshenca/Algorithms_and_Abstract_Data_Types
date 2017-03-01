@@ -332,7 +332,12 @@ void printGraph(FILE* out, Graph G){
 	}
 	for(int i = 1; i <= getOrder(G); i++){
 		fprintf(out, "%d: ", i); //"i: "
-		printList(out, G->list[i]); //calling List ADT's printList function to print out
+//		if(G->list[i] == NULL){ //if the list is empty
+//			//to avoid error message from List ADT's printList
+//			fprintf(out,"");
+//		} else{
+			printList(out, G->list[i]); //calling List ADT's printList function to print out
+//		}
 		fprintf(out, "\n"); //new line
 	}
 }
