@@ -13,7 +13,7 @@
 int main(){
 	int n = 10;
 	Graph G = newGraph(n);
-	List L = newList();
+	//List L = newList();
 
 	addEdge(G, 1, 2);
 	addEdge(G, 1, 6);
@@ -57,7 +57,21 @@ int main(){
 	int destination = 5;
 	BFS(G,source);
 	printf("The distance from %i to %i is %i\n", source, destination, getDist(G,destination));
+	printf("parent: %i\n",getParent(G,1));
+	makeNull(G);
 
+	printf("\n");
+	n = 3;
+	G = newGraph(n);
+	addArc(G, 1, 2);
+	//addArc(G, 1, 3);
+	addArc(G, 2, 3);
+	//addArc(G, 3, 1);
+	printGraph(stdout, G);
+	source = 1;
+	destination = 3;
+	BFS(G,source);
+	printf("The distance from %i to %i is %i\n", source, destination, getDist(G,destination));
 
 	freeGraph(&G);
 }
