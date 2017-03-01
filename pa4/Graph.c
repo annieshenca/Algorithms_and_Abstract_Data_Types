@@ -14,7 +14,7 @@
 #define GREY 1
 #define BLACK 2
 
-#define INTF -1 //represent infinity, because there's no such thing as negative distance
+#define INF -1 //represent infinity, because there's no such thing as negative distance
 #define NIL 0 //represents undefined vertex label
 
 //Private GraphObj type
@@ -44,7 +44,7 @@ Graph newGraph(int n){
 	for(int i = 1; i < n; i++){
 		graph->list[i] = newList();
 		graph->color[i] = WHITE; 	//color = 0(white)
-		graph->dist[i] = INTF; 	//distance = infinity
+		graph->dist[i] = INF; 	//distance = infinity
 		graph->parent[i] = NIL; //parent = 0
 	}
 	return graph;
@@ -141,7 +141,7 @@ int getDist(Graph G, int u){
 		exit(EXIT_FAILURE);
 	}
 	if(getSource(G) == NIL){ //not yet been called
-		return INTF;
+		return INF;
 	}else{
 		return G->dist[u];
 	}
@@ -185,7 +185,7 @@ void makeNull(Graph G){
 		clear(G->list[i]);
 		G->color[i] = WHITE; //== 0
 		G->dist[i] = NIL; //== 0
-		G->parent[i] = INTF; //== -1
+		G->parent[i] = INF; //== -1
 	}
 	//G->numVertex = 0;
 	G->numEdge = 0;
@@ -284,7 +284,25 @@ void addArc(Graph G, int u, int v){
 		printf("addArc error: vertex u > numVertex.");
 		exit(EXIT_FAILURE);
 	}
-	append(G->list[u], v); //from u to v
+
+	//from u to v first
+	List U = G->list[u];
+	//moveFront(U);
+	if(length(U) == 0){ //if length of list[u] is 0 == empty
+		prepend(U, v); //insert in the front
+	} else{
+		moveFront(U);
+
+		while(index(U) != -1 && get(U) < v){
+			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
+			moveNext(U);
+		}
+		if(index(U) == -1){ //if the cursor falls off the list
+			append(U,v);
+		} else{
+			insertBefore(U, v);
+		}
+	}
 }
 
 //BFS()
@@ -296,23 +314,29 @@ void BFS(Graph G, int s){
 		printf("BFS error: calling NULL Graph.");
 		exit(EXIT_FAILURE);
 	}
+	//G->source = s;
+	int x = 0;
+	//int y = 0;
 	for(int i = 1; i< getOrder(G); i++){
 		G->color[i] = WHITE;
-		G->dist[i] = INTF;
+		G->dist[i] = INF;
 		G->parent[i] = NIL;
 	}
-	G->color[s] = GREY;
-	G->dist[s] = 0;
-	G->parent[s] = NIL;
+
+	G->color[s] = GREY; //discovered! but not done yet
+	G->dist[s] = 0; //distance of source is always 0
+	G->parent[s] = NIL; //source has no parent
 	List Q = newList();
-	//enqueue(Q, s);
-	while(Q != NULL){
-		//x = dequeue(Q);
-		for(int j = 1; j < getOrder(G); j++){
-			if(G->color[j] == WHITE){
-				G->color[j] = GREY;
-				//G->dist[j] = G->dist[i] + 1;
-				G->parent[j] = s;
+	append(Q, s); //insert source into list Q
+	while(length(Q) != 0){
+		x = front(Q); //save the front element of list Q as x
+		deleteFront(Q); //pop off queue
+		moveFront(G->list[x]);
+		for(int y = 1; y < getOrder(G); y++){
+			if(G->color[y] == WHITE){
+				G->color[y] = GREY;
+				G->dist[y] = G->dist[x] + 1;
+				G->parent[y] = s;
 				//enqueue(Q,j);
 			}
 		}

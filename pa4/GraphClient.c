@@ -41,7 +41,6 @@ int main(){
 	g = newGraph(5);
 	addEdge(g,1,2);
 	addEdge(g,1,3);
-	//printf("here\n");
 	addEdge(g,1,4);
 	addEdge(g,2,3);
 	//addEdge(g,6,1);
@@ -50,7 +49,7 @@ int main(){
 	//addEdge(g,5,6);
 	printf("size: %i\n",getSize(g));
 	printGraph(stdout,g);
-	printf("here\n");
+
 	makeNull(g);
 	printGraph(stdout,g);
 	g = newGraph(6);
@@ -71,7 +70,7 @@ int main(){
 //	getPath(l,g,2);
 //	printList(stdout,l);
 //	makeNull(g);
-//	freeGraph(&g);
+	freeGraph(&g);
 //	return 0;
 }
 
