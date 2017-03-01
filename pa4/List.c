@@ -454,10 +454,10 @@ void delete(List L){
 
 //printList(FILE, List)
 void printList(FILE* out, List L){
-	if(L == NULL){
-		fprintf(out, "printList() Error: calling on NULL list.\n");
-		exit(EXIT_FAILURE);
-	}
+//	if(L == NULL){
+//		fprintf(out, "printList() Error: calling on NULL list.\n");
+//		exit(EXIT_FAILURE);
+//	}
 	Node N = L->head;
 	for(; N != NULL; N = N->next){
 		fprintf(out, "%d ", N->item);
