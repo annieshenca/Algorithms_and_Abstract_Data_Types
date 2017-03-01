@@ -255,8 +255,8 @@ void addEdge(Graph G, int u, int v){
 			insertBefore(V, u);
 		}
 	}
-	free(&U);
-	free(&V);
+//	free(&U);
+//	free(&V);
 }
 
 //addArc
