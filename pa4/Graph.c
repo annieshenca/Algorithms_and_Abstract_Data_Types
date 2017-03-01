@@ -326,18 +326,19 @@ void BFS(Graph G, int s){
 //prints the adjacency list representation of G to the file pointed to by out
 //pre: G != NULL
 void printGraph(FILE* out, Graph G){
-	if(G == NULL){
-		fprintf(out, "printGraph error: calling NULL Graph.");
-		exit(EXIT_FAILURE);
-	}
-	for(int i = 1; i <= getOrder(G); i++){
+//	if(G == NULL){
+//		fprintf(out, "printGraph error: calling NULL Graph.");
+//		exit(EXIT_FAILURE);
+//	}
+	for(int i = 1; i < getOrder(G) + 1; i++){
 		fprintf(out, "%d: ", i); //"i: "
-//		if(G->list[i] == NULL){ //if the list is empty
-//			//to avoid error message from List ADT's printList
-//			fprintf(out,"");
-//		} else{
+
+		if(G->list[i] == NULL){
+			fprintf(out, "");
+		} else{
 			printList(out, G->list[i]); //calling List ADT's printList function to print out
-//		}
+		}
+
 		fprintf(out, "\n"); //new line
 	}
 }
