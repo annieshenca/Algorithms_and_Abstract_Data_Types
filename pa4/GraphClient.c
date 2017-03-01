@@ -35,7 +35,7 @@ int main(){
 	printf("parent: %i\n",getParent(g,1));
 	//printf("%i\n",getParent(g,0));
 	//printf("%i\n",getDist(g,6));
-	printf("get dist%i\n",getDist(g,5));
+	printf("get dist: %i\n",getDist(g,5));
 	freeGraph(&g);
 	//printf("%i\n",getDist(g,5));
 	g = newGraph(5);
@@ -74,3 +74,29 @@ int main(){
 //	freeGraph(&g);
 //	return 0;
 }
+
+//5
+//0
+//-1
+//0
+//get dist-1
+//size: 4
+//1: 2 3 4
+//2: 1 3
+//3: 1 2
+//4: 1
+//5:
+//1:
+//2:
+//3:
+//4:
+//5:
+//1: 2 3
+//2: 1 4 5 6
+//3: 1 4
+//4: 2 3 5
+//5: 2 4 6
+//6: 2 5
+//The distance from 3 to 2 is 2
+//3 1 2
+//Process finished with exit code 0

@@ -255,8 +255,8 @@ void addEdge(Graph G, int u, int v){
 			insertBefore(V, u);
 		}
 	}
-//	free(&U);
-//	free(&V);
+	free(&U);
+	free(&V);
 }
 
 //addArc
@@ -332,13 +332,12 @@ void printGraph(FILE* out, Graph G){
 //	}
 	for(int i = 1; i < getOrder(G) + 1; i++){
 		fprintf(out, "%d: ", i); //"i: "
-
-		if(G->list[i] == NULL){
+		if(G->list[i] == NULL){ //if the list is empty
+			//to avoid List ADT's printList error message from printList()
 			fprintf(out, "");
 		} else{
 			printList(out, G->list[i]); //calling List ADT's printList function to print out
 		}
-
 		fprintf(out, "\n"); //new line
 	}
 }
