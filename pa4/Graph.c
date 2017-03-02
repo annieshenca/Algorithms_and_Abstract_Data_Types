@@ -371,7 +371,7 @@ void printGraph(FILE* out, Graph G){
 		exit(EXIT_FAILURE);
 	}
 	for(int i = 1; i < getOrder(G)+1; i++){
-		fprintf(out, "%d:", i); //"i: "
+		fprintf(out, "%d: ", i); //"i: "
 		if(G->list[i] == NULL){ //if the list is empty
 			//to avoid List ADT's printList error message from printList()
 			fprintf(out, "");

@@ -458,9 +458,12 @@ void printList(FILE* out, List L){
 		fprintf(out, "printList() Error: calling on NULL list.\n");
 		exit(EXIT_FAILURE);
 	}
-
-	for(Node N = L->head; N != NULL; N = N->next){
-		fprintf(out, " %d", N->item);
+	Node N = L->head;
+	while(N != NULL){
+		for(; N->next != NULL; N = N->next){
+			fprintf(out, "%d ", N->item);
+		}
+		fprintf(out, "%d", N->item);
 	}
 }
 
