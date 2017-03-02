@@ -464,6 +464,7 @@ void printList(FILE* out, List L){
 			fprintf(out, "%d ", N->item);
 		}
 		fprintf(out, "%d", N->item);
+		N = N->next
 	}
 }
 
