@@ -81,9 +81,6 @@ int main(int argc, char*argv[]){
 			}
 			clear(L);
 		}
-//		else{ //if sense the 0 0 end pair
-//			flag = 1;
-//		}
 	}while(fgets(c,MAX_LENGTH,in) != NULL);
 
 	freeGraph(&G);
