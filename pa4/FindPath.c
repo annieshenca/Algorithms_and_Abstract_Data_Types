@@ -62,12 +62,9 @@ int main(int argc, char*argv[]){
 		if(u != 0 && v !=0){
 			BFS(G,u);
 			fprintf(out, "\n");
-			if(getDist(G,v) != 0){
-				fprintf(out, "The distance from %d to %d is %d\n", u, v, getDist(G, v));
-				fprintf(out, "A shortest %d-%d path is:", u, v);
-				getPath(L,G,v); //get the path and store into list L
-				printList(out, L); //print out the list of vertices
-				fprintf(out, "\n");
+			if(getDist(G,v) == -1){
+				fprintf(out, "The distance from %d to %d is infinity\n", u, v);
+				fprintf(out, "No %d-%d path exists\n", u, v);
 
 			} else if(u == v){
 				fprintf(out, "The distance from %d to %d is 0\n", u, v);
@@ -75,9 +72,11 @@ int main(int argc, char*argv[]){
 				fprintf(out, "\n");
 
 			} else{
-				fprintf(out, "The distance from %d to %d is infinity\n", u, v);
-				fprintf(out, "No %d-%d path exists\n", u, v);
-
+				fprintf(out, "The distance from %d to %d is %d\n", u, v, getDist(G, v));
+				fprintf(out, "A shortest %d-%d path is:", u, v);
+				getPath(L,G,v); //get the path and store into list L
+				printList(out, L); //print out the list of vertices
+				fprintf(out, "\n");
 			}
 			clear(L);
 		}

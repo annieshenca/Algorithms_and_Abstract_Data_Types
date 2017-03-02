@@ -358,7 +358,7 @@ void BFS(Graph G, int s){
 	} //end of while
 	//prevent memory leak
 	freeList(&Q);
-	Q = NULL;
+	//Q = NULL;
 }//end BFS()
 
 /********************* Other operations *********************/
