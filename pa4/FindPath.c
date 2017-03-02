@@ -73,7 +73,7 @@ int main(int argc, char*argv[]){
 
 			} else{
 				fprintf(out, "The distance from %d to %d is %d\n", u, v, getDist(G, v));
-				fprintf(out, "A shortest %d-%d path is:", u, v);
+				fprintf(out, "A shortest %d-%d path is: ", u, v);
 				getPath(L,G,v); //get the path and store into list L
 				printList(out, L); //print out the list of vertices
 				fprintf(out, "\n");
