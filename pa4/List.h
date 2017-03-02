@@ -6,9 +6,10 @@
  * List.h
  */
 
+
 #ifndef LIST_H_
 #define LIST_H_
-
+#include <stdio.h>
 typedef struct ListObj* List;
 
 List newList(void);
