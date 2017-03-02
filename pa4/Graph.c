@@ -54,7 +54,7 @@ Graph newGraph(int n){
 void freeGraph(Graph* pG){
 	if(pG != NULL && *pG != NULL){ //check if there's anything in pG to be freed.
 		//free array of lists
-		for(int i = 1; i < getOrder(*pG); i++){
+		for(int i = 1; i < getOrder(*pG)+1; i++){
 			freeList(&((*pG)->list[i]));
 		}
 		//free arrays
@@ -358,6 +358,7 @@ void BFS(Graph G, int s){
 	} //end of while
 	//prevent memory leak
 	freeList(&Q);
+	//freeGraph(&G);
 	//Q = NULL;
 }//end BFS()
 
