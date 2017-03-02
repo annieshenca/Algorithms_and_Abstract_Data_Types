@@ -15,19 +15,19 @@ Table of Contents:
 (Total number of files: 8 files)
 
 Descriptions:
--List.c:
+-List.c: List ADT.
 
--List.h:
+-List.h: Header file of List.c. Includes declared functions and links the List and client together.
 
--Graph.c:
+-Graph.c: Graph ADT. Implements List ADT to perform graphing functions for creating BFS.
 
--Graph.h:
+-Graph.h: Header file of Graph.c. Includes declared functions of Graph.c
 
--GraphTest.c:
+-GraphTest.c: Testing file for Graph.c functions.
 
--FindPath.c:
+-FindPath.c: Main client file. Takes in one input and one output file. Prints out BFS graph and display the shortest path from selected source to destination.
 
--Makefile:
+-Makefile: A building tool used to simplify the compiling and removing the files.
 
--README:
+-README: Table of content and description of files.
 
