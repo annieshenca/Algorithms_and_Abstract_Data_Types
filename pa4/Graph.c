@@ -13,7 +13,6 @@
 #define WHITE 0
 #define GREY 1
 #define BLACK 2
-
 #define INF -1 //represent infinity, because there's no such thing as negative distance
 #define NIL 0 //represents undefined vertex label
 
@@ -229,8 +228,9 @@ void addEdge(Graph G, int u, int v){
 	if(length(U) == 0){ //if length of list[u] is 0 == empty
 		prepend(U, v); //insert in the front
 	} else{
+		//printf("U:1\n");
 		moveFront(U);
-
+		//printf("U:2\n");
 		while(index(U) != -1 && get(U) < v){
 			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
 			moveNext(U);
@@ -248,7 +248,9 @@ void addEdge(Graph G, int u, int v){
 	if(length(V) == 0){ //if length of list[u] is 0 == empty
 		prepend(V, u); //insert in the front
 	} else{
+		//printf("V:1\n");
 		moveFront(V);
+		//printf("V:1\n");
 		while(index(V) != -1 && get(V) < u){
 			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
 			moveNext(V);
@@ -296,7 +298,9 @@ void addArc(Graph G, int u, int v){
 	if(length(U) == 0){ //if length of list[u] is 0 == empty
 		prepend(U, v); //insert in the front
 	} else{
+		printf("UU:1\n");
 		moveFront(U);
+		printf("UU:2\n");
 
 		while(index(U) != -1 && get(U) < v){
 			//while the matrix cursor is not invalid(-1), and the matrix's ith is less than j
@@ -337,7 +341,9 @@ void BFS(Graph G, int s){
 	while(length(Q) != 0){
 		i = front(Q); //save the front element of list Q as x
 		deleteFront(Q); //pop off list Q
+		//printf("G:1\n");
 		moveFront(G->list[i]); //place cursor at the front of the list Q
+		//printf("G:2\n");
 		while(index(G->list[i]) != -1){ //while the cursor is in bound
 			j = get(G->list[i]); //y = the element the cursor is currently pointing to
 			if(G->color[j] == WHITE){ //if the current element has not been discovered yet, discover it!
@@ -365,7 +371,7 @@ void printGraph(FILE* out, Graph G){
 		exit(EXIT_FAILURE);
 	}
 	for(int i = 1; i < getOrder(G)+1; i++){
-		fprintf(out, "%d: ", i); //"i: "
+		fprintf(out, "%d:", i); //"i: "
 		if(G->list[i] == NULL){ //if the list is empty
 			//to avoid List ADT's printList error message from printList()
 			fprintf(out, "");

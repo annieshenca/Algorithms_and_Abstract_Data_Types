@@ -387,7 +387,7 @@ void deleteFront(List L){
 	Node temp = L->head;
 	if(length(L) == 1){ //If the list has only one element
 		L->head = L->tail = L->cursor = NULL; //Reset
-		L->cIndex = -1;
+		//L->cIndex = -1;
 	} else{ //The list has more than 1 element
 		L->head = L->head->next;
 		L->head->prev = NULL;
@@ -460,7 +460,7 @@ void printList(FILE* out, List L){
 	}
 
 	for(Node N = L->head; N != NULL; N = N->next){
-		fprintf(out, "%d ", N->item);
+		fprintf(out, " %d", N->item);
 	}
 }
 

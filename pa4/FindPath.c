@@ -41,7 +41,8 @@ int main(int argc, char*argv[]){
 	Graph G = newGraph(size);
 	List L = newList();
 	int flag =  0;
-	while(fgets(c, MAX_LENGTH, in) != NULL || flag == 0){
+
+	while(fgets(c, MAX_LENGTH, in) != NULL && flag == 0){
 		sscanf(c, "%d %d",&u,&v);
 		if(u != 0 && v !=0){
 			addEdge(G,u,v);
@@ -51,26 +52,39 @@ int main(int argc, char*argv[]){
 	} //get out of while loop once reach 0 0 pair
 	printGraph(out, G); //prints u and v to output file
 
-	fgets(c,MAX_LENGTH,in); //takes in the 0 0 pair. skipping this line
+	//fprintf(out, "c: %s\n",c);
 	flag = 0; //reset flag back to 0
+
 	//to read the second half of the input file. Calculating distance between u and v
-	while(fgets(c, MAX_LENGTH, in) != NULL || flag == 0) {
+	do{
 		sscanf(c, "%d %d",&u,&v);
-		BFS(G,u);
+		//printf("u: %i\n",u);
 		if(u != 0 && v !=0){
+			BFS(G,u);
+			fprintf(out, "\n");
 			if(getDist(G,v) != 0){
-				fprintf(out, "The distance from %d to %d is %d", u, v, getDist(G, v));
-				fprintf(out, "A shortest %d-%d path is: ", u, v);
+				fprintf(out, "The distance from %d to %d is %d\n", u, v, getDist(G, v));
+				fprintf(out, "A shortest %d-%d path is:", u, v);
 				getPath(L,G,v); //get the path and store into list L
 				printList(out, L); //print out the list of vertices
+				fprintf(out, "\n");
+
+			} else if(u == v){
+				fprintf(out, "The distance from %d to %d is 0\n", u, v);
+				fprintf(out, "A shortest %d-%d path is: %d", u, u, u);
+				fprintf(out, "\n");
+
 			} else{
-				fprintf(out, "The distance from %d to %d is infinity", u, v);
-				fprintf(out, "No %d-%d path exists", u, v);
+				fprintf(out, "The distance from %d to %d is infinity\n", u, v);
+				fprintf(out, "No %d-%d path exists\n", u, v);
+
 			}
-		} else{ //if sense the 0 0 end pair
-			flag = 1;
+			clear(L);
 		}
-	}
+//		else{ //if sense the 0 0 end pair
+//			flag = 1;
+//		}
+	}while(fgets(c,MAX_LENGTH,in) != NULL);
 
 	freeGraph(&G);
 	freeList(&L);
