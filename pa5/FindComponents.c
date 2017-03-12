@@ -60,7 +60,7 @@ int main(int argc, char*argv[]){
 	Graph T = transpose(G);
 	DFS(T, S);
 
-	printList(out, S);
+	//printList(out, S);
 
 	int numSCC = 0; //number of strongly connected components
 	moveFront(S);
