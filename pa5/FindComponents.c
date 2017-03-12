@@ -73,7 +73,8 @@ int main(int argc, char*argv[]){
 	//fprintf(out, "%i", numSCC);
 	fprintf(out, "\n");
 	fprintf(out, "G contains %i strongly connected components:\n", numSCC);
-	List comp[numSCC];
+	List comp[numSCC + 1];
+
 	moveBack(S); //start from the back of the Stack list
 	while(index(S) != -1){ //while in bound
 		for(int i = 1; i < numSCC+1; i++){
