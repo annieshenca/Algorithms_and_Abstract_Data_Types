@@ -14,7 +14,7 @@ HEADERS        = Graph.h List.h
 COMPILE        = gcc -c -std=c99 -Wall
 LINK           = gcc -o
 REMOVE         = rm -f
-MEMCHECK       = valgrind --leak-check=full
+MEMCHECK       = valgrind --leak-check=full --show-leak-kinds=all
 
 FindComponents : FindComponents.o $(BASE_OBJECTS)
 	$(LINK) FindComponents FindComponents.o $(BASE_OBJECTS)
