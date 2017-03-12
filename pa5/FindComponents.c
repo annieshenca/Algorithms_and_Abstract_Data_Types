@@ -79,11 +79,11 @@ int main(int argc, char*argv[]){
 	for(int i = 1; i < numSCC+1; i++){
 		comp[i] = newList(); //create component lists
 		while(getParent(T, get(S)) != NIL){
-			prepend(S, get(S));
+			prepend(comp[i], get(S));
 			movePrev(S);
 		}
 		//when reach the vertex that the parent is NIL
-		prepend(S, get(S));
+		prepend(comp[i], get(S));
 		movePrev(S);
 	}
 
