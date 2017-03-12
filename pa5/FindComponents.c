@@ -76,18 +76,17 @@ int main(int argc, char*argv[]){
 	List comp[numSCC + 1];
 
 	moveBack(S); //start from the back of the Stack list
-	while(index(S) != -1){ //while in bound
-		for(int i = 1; i < numSCC+1; i++){
-			comp[i] = newList(); //create component lists
-			while(getParent(T, get(S)) != NIL){
-				prepend(S, get(S));
-				movePrev(S);
-			}
-			//when reach the vertex that the parent is NIL
+	for(int i = 1; i < numSCC+1; i++){
+		comp[i] = newList(); //create component lists
+		while(getParent(T, get(S)) != NIL){
 			prepend(S, get(S));
 			movePrev(S);
 		}
+		//when reach the vertex that the parent is NIL
+		prepend(S, get(S));
+		movePrev(S);
 	}
+
 
 	for(int i = 1; i < numSCC+1; i++){
 		fprintf(out, "Component %i: ", i);
