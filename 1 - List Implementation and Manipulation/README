@@ -1,0 +1,25 @@
+Annie Shen
+ashen7@ucsc.edu
+CMPS101
+
+Table of Content:
+-List.java          written by me
+-ListClient.java    provided on webpage
+-Lex.java           written by me
+-Makefile           provided on webpage
+-README             written by me
+(Total of files: 5)
+
+Description:
+-List.java: List ADT functions. Functions to insure the client will
+            run without problems.
+
+-ListClient.java: Java test file. Testing List.java functions.
+
+-Lex.java: Lex.java takes two command line arguments (input and output
+           file), and use List.java ADT to reorder the input file in
+           lexicographic order, then print to output file.
+
+-Makefile: A building tool used to simplify the compiling and removing
+           the files.
+-README: Table of content and description of files.

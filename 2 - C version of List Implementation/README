@@ -1,0 +1,31 @@
+Annie Shen
+ashen7@ucsc.edu
+1562848
+CMPS101 pa2
+Due Jan 28, 2017
+
+Table of Content:
+-List.c             written by me
+-List.h             written by me
+-ListClient.c       provided on webpage
+-Lex.c              written by me
+-Makefile           provided on webpage
+-README             written by me
+(Total of files: 6)
+
+Description:
+-List.c: List ADT functions. Functions to insure the client will
+            run without problems.
+
+-List.h: Header file. Includes declared functions and links the List and client together.
+
+-ListClient.c: c test file. Testing List.c functions.
+
+-Lex.c: Lex.c takes two command line arguments (input and output
+           file), and use List.c ADT to reorder the input file in
+           lexicographic order, then print to output file.
+
+-Makefile: A building tool used to simplify the compiling and removing
+           the files.
+
+-README: Table of content and description of files.

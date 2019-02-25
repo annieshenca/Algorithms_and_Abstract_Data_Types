@@ -1,0 +1,33 @@
+Annie Shen
+ashen7@ucsc.edu
+ID#1562848
+CMPS 101 - pa4
+
+Table of Contents:
+-List.c         written by me, modified from pa2
+-List.h         written by me, modified from pa2
+-Graph.c        written by me
+-Graph.h        written by me
+-GraphTest.c    written by me
+-FindPath.c     written by me
+-Makefile       provided by the instructor
+-README         written by me
+(Total number of files: 8 files)
+
+Descriptions:
+-List.c: List ADT.
+
+-List.h: Header file of List.c. Includes declared functions and links the List and client together.
+
+-Graph.c: Graph ADT. Implements List ADT to perform graphing functions for creating BFS.
+
+-Graph.h: Header file of Graph.c. Includes declared functions of Graph.c
+
+-GraphTest.c: Testing file for Graph.c functions.
+
+-FindPath.c: Main client file. Takes in one input and one output file. Prints out BFS graph and display the shortest path from selected source to destination.
+
+-Makefile: A building tool used to simplify the compiling and removing the files.
+
+-README: Table of content and description of files.
+
